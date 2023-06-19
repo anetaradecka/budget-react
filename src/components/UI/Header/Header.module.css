@@ -1,0 +1,32 @@
+  header {
+    width: 85%;
+    height: 15%;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  header div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+  }
+
+  header .h-group {
+    padding: 15px 0;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+  
+  header h2 {
+    font-size: 1.2rem;
+  }
+
+  #first-row {
+    border-bottom: 1px solid var(--row-border);
+  }

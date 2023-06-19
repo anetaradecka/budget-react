@@ -1,0 +1,7 @@
+.container {
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 0px;
+    margin: 0 50px;
+  }

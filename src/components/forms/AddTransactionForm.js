@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 
-import "./../assets/global.css";
-import "./AddTransaction.css";
-import Button from "./UI/Button";
+import styles from "./AddTransactionForm.module.css";
+import ButtonPrimary from "../buttons/ButtonPrimary";
+import Container from "../layout/Container";
 
-const AddTransaction = (props) => {
+const AddTransactionForm = (props) => {
   const [enteredCategory, setEnteredCategory] = useState("");
   const [enteredValue, setEnteredValue] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -58,19 +58,19 @@ const AddTransaction = (props) => {
   };
 
   return (
-    <div className="container">
-      <form className="transaction-form" onSubmit={submitHandler}>
-        <div className="form-control-group">
-          <div className={`form-control ${!isValid ? "invalid" : ""}`}>
+    <Container >
+      <form className={styles["transaction-form"]} onSubmit={submitHandler}>
+        <div className={styles["form-control-group"]}>
+          <div className={`${styles['form-control']} ${!isValid ? styles.invalid : ""}`}>
             <label htmlFor="category">category</label>
-            <select id="category" name="category">
+            <select id={styles.category} name="category">
               <option value={enteredCategory} onChange={categoryChangeHandler}>
                 category
               </option>
             </select>
           </div>
 
-          <div className={`form-control ${!isValid ? "invalid" : ""}`}>
+          <div className={`${styles['form-control']} ${!isValid ? styles.invalid : ""}`}>
             <label htmlFor="value">value</label>
             <input
               type="number"
@@ -82,7 +82,7 @@ const AddTransaction = (props) => {
             />
           </div>
 
-          <div className={`form-control ${!isValid ? "invalid" : ""}`}>
+          <div className={`${styles['form-control']} ${!isValid ? styles.invalid : ""}`}>
             <label htmlFor="date">date</label>
             <input
               type="date"
@@ -93,7 +93,7 @@ const AddTransaction = (props) => {
             />
           </div>
 
-          <div className="form-control">
+          <div className={styles['form-control']}>
             <label htmlFor="description">*description (optional)</label>
             <textarea
               name="comment"
@@ -105,13 +105,13 @@ const AddTransaction = (props) => {
           </div>
         </div>
 
-        <Button type="submit">+ Add transaction</Button>
+        <ButtonPrimary type="submit">+ Add transaction</ButtonPrimary>
 
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <input type="hidden" name="type" value="<%= type %>" />
       </form>
-    </div>
+    </Container>
   );
 };
 
-export default AddTransaction;
+export default AddTransactionForm;
