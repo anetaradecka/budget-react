@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useState } from "react";
 
 import styles from "./AddTransactionForm.module.css";
 import ButtonPrimary from "../buttons/ButtonPrimary";
@@ -58,10 +58,14 @@ const AddTransactionForm = (props) => {
   };
 
   return (
-    <Container >
+    <Container>
       <form className={styles["transaction-form"]} onSubmit={submitHandler}>
         <div className={styles["form-control-group"]}>
-          <div className={`${styles['form-control']} ${!isValid ? styles.invalid : ""}`}>
+          <div
+            className={`${styles["form-control"]} ${
+              !isValid ? styles.invalid : ""
+            }`}
+          >
             <label htmlFor="category">category</label>
             <select id={styles.category} name="category">
               <option value={enteredCategory} onChange={categoryChangeHandler}>
@@ -70,7 +74,11 @@ const AddTransactionForm = (props) => {
             </select>
           </div>
 
-          <div className={`${styles['form-control']} ${!isValid ? styles.invalid : ""}`}>
+          <div
+            className={`${styles["form-control"]} ${
+              !isValid ? styles.invalid : ""
+            }`}
+          >
             <label htmlFor="value">value</label>
             <input
               type="number"
@@ -82,7 +90,11 @@ const AddTransactionForm = (props) => {
             />
           </div>
 
-          <div className={`${styles['form-control']} ${!isValid ? styles.invalid : ""}`}>
+          <div
+            className={`${styles["form-control"]} ${
+              !isValid ? styles.invalid : ""
+            }`}
+          >
             <label htmlFor="date">date</label>
             <input
               type="date"
@@ -93,7 +105,7 @@ const AddTransactionForm = (props) => {
             />
           </div>
 
-          <div className={styles['form-control']}>
+          <div className={styles["form-control"]}>
             <label htmlFor="description">*description (optional)</label>
             <textarea
               name="comment"
