@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import DUMMY_TRANSACTIONS from "../data/dummyTransactions";
-import AddTransactionForm from "../components/forms/AddTransactionForm";
-import TransactionsGrid from "../components/UI/Main/transactions/TransactionsGrid";
+import DUMMY_TRANSACTIONS from "../../data/dummyTransactions";
+import AddTransactionForm from "../../components/forms/AddTransactionForm";
+import TransactionsGrid from "./TransactionsGrid";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState(DUMMY_TRANSACTIONS);
