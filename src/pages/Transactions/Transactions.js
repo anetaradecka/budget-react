@@ -13,10 +13,25 @@ const Transactions = () => {
     });
   };
 
+  const deleteTransactionHandler = (itemId) => {
+    let filteredTransactions = [];
+    transactions.filter((transaction) => {
+      if (transaction.id !== itemId) {
+        filteredTransactions.push(transaction);
+      }
+      return filteredTransactions;
+    });
+
+    setTransactions(filteredTransactions);
+  };
+
   return (
     <>
       <AddTransactionForm onAddTransaction={addTransactionHandler} />
-      <TransactionsGrid transactions={transactions} />
+      <TransactionsGrid
+        transactions={transactions}
+        onDeleteTransactionHandler={deleteTransactionHandler}
+      />
     </>
   );
 };

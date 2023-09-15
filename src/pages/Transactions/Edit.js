@@ -4,9 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const Edit = () => {
+const Edit = (props) => {
+  const deleteButtonHandler = () => {
+    props.onDeleteTransactionHandler(props.itemId);
+  };
   return (
-    <div className={`${styles['cell-edit']} ${styles['grid-cell']}`}>
+    <div className={`${styles["cell-edit"]} ${styles["grid-cell"]}`}>
       <input
         type="hidden"
         value="<%= transaction.item._id %>"
@@ -16,7 +19,11 @@ const Edit = () => {
       <input type="hidden" name="type" value="<%= type %>" />
       <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
       <FontAwesomeIcon icon={faPenToSquare} className={styles.fontawesome} />
-      <button className={styles['btn-hidden']} type="button">
+      <button
+        className={styles["btn-hidden"]}
+        type="button"
+        onClick={deleteButtonHandler}
+      >
         <FontAwesomeIcon icon={faTrash} className={styles.fontawesome} />
       </button>
     </div>

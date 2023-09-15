@@ -7,6 +7,9 @@ import TransactionData from "./TransactionData";
 import Container from "../../components/layout/Container";
 
 const Transactions = (props) => {
+  const deleteTransactionHandler = (itemId) => {
+    props.onDeleteTransactionHandler(itemId);
+  };
   return (
     <Container>
       <div className={styles["grid-panel"]}>
@@ -30,7 +33,10 @@ const Transactions = (props) => {
               <Grid key={transaction.id}>
                 <Img />
                 <TransactionData transaction={transaction} />
-                <Edit />
+                <Edit
+                  onDeleteTransactionHandler={deleteTransactionHandler}
+                  itemId={transaction.id}
+                />
               </Grid>
             ))}
         </section>
