@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import DUMMY_TRANSACTIONS from "../../data/dummyTransactions";
-import AddTransactionForm from "../../components/forms/AddTransactionForm";
+import DUMMY_TRANSACTIONS from "../../assets/dummyTransactions";
+import AddTransactionForm from "../../components/UI/forms/AddTransactionForm";
 import TransactionsGrid from "./TransactionsGrid";
 
 const Transactions = () => {

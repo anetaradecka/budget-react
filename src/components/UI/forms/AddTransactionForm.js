@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import styles from "./AddTransactionForm.module.css";
 import ButtonPrimary from "../buttons/ButtonPrimary";
-import Container from "../layout/Container";
+import Container from "../../layout/Container";
 
 const AddTransactionForm = (props) => {
   const [enteredCategory, setEnteredCategory] = useState("");

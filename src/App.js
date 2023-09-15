@@ -1,6 +1,6 @@
-import Header from "./components/UI/Header/Header";
-import Sidebar from "./components/UI/Sidebar/Sidebar";
-import Main from "./components/UI/Main/Main";
+import Header from "./components/layout/Header/Header";
+import Sidebar from "./components/layout/Sidebar/Sidebar";
+import Main from "./components/layout/Main/Main";
 import Transactions from "./pages/Transactions/Transactions";
 
 function App() {
