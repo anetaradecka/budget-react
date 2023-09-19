@@ -27,15 +27,17 @@ const Transactions = (props) => {
             ></div>
           </div>
 
-          {props.transactions.length === 0 && <p>No transactions found!</p>}
+          {props.transactions.length === 0 && (
+            <p className={styles.noresults}>No transactions found!</p>
+          )}
           {props.transactions.length > 0 &&
             props.transactions.map((transaction) => (
-              <Grid key={transaction.id}>
+              <Grid key={transaction._id}>
                 <Img />
                 <TransactionData transaction={transaction} />
                 <Edit
                   onDeleteTransactionHandler={deleteTransactionHandler}
-                  itemId={transaction.id}
+                  itemId={transaction._id}
                 />
               </Grid>
             ))}

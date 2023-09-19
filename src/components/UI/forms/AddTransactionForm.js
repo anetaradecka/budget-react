@@ -5,7 +5,7 @@ import ButtonPrimary from "../buttons/ButtonPrimary";
 import Container from "../../layout/Container";
 
 const AddTransactionForm = (props) => {
-  const [enteredCategory, setEnteredCategory] = useState("");
+  const [enteredCategory, setEnteredCategory] = useState("food");
   const [enteredValue, setEnteredValue] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
@@ -47,7 +47,6 @@ const AddTransactionForm = (props) => {
       value: enteredValue,
       date: new Date(enteredDate),
       description: enteredDescription,
-      id: Math.random().toString(),
     };
 
     props.onAddTransaction(transactionData);
@@ -67,10 +66,14 @@ const AddTransactionForm = (props) => {
             }`}
           >
             <label htmlFor="category">category</label>
-            <select id={styles.category} name="category">
-              <option value={enteredCategory} onChange={categoryChangeHandler}>
-                category
-              </option>
+            <select
+              id={styles.category}
+              name="category"
+              onChange={categoryChangeHandler}
+            >
+              <option value="food">food</option>
+              <option value="bills">bills</option>
+              <option value="education">education</option>
             </select>
           </div>
 

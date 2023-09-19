@@ -61,5 +61,9 @@
   display: flex;
   background: none;
   border: none;
-} 
+}
 
+.noresults {
+  text-align: center;
+  padding: 20px;
+}
