@@ -6,10 +6,7 @@ import Edit from "./Edit";
 import TransactionData from "./TransactionData";
 import Container from "../../components/layout/Container";
 
-const Transactions = (props) => {
-  const deleteTransactionHandler = (itemId) => {
-    props.onDeleteTransactionHandler(itemId);
-  };
+const TransactionsGrid = (props) => {
   return (
     <Container>
       <div className={styles["grid-panel"]}>
@@ -35,10 +32,7 @@ const Transactions = (props) => {
               <Grid key={transaction._id}>
                 <Img />
                 <TransactionData transaction={transaction} />
-                <Edit
-                  onDeleteTransactionHandler={deleteTransactionHandler}
-                  itemId={transaction._id}
-                />
+                <Edit itemId={transaction._id} />
               </Grid>
             ))}
         </section>
@@ -47,4 +41,4 @@ const Transactions = (props) => {
   );
 };
 
-export default Transactions;
+export default TransactionsGrid;

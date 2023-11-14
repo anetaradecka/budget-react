@@ -20,6 +20,7 @@ const Transactions = () => {
 
 export default Transactions;
 
+// Fetching data on component load
 export async function loader() {
   const response = await fetch("http://localhost:8080/transactions");
   if (!response.ok) {
@@ -33,6 +34,7 @@ export async function loader() {
   }
 }
 
+// Actions taken basen on request POST/DELETE method
 export async function action({ request, params }) {
   const requestData = await request.formData();
   const selectedAction = requestData.get("actionType");
@@ -61,10 +63,8 @@ export async function action({ request, params }) {
         category: requestData.get("category"),
         date: requestData.get("date"),
         value: requestData.get("value"),
-        comment: requestData.get("comment"),
+        description: requestData.get("description"),
       };
-
-      console.log(submitData);
 
       response = await fetch(
         "http://localhost:8080/transactions/add-transaction",

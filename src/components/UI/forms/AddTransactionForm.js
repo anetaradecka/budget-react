@@ -93,8 +93,8 @@ const AddTransactionForm = (props) => {
           <div className={styles["form-control"]}>
             <label htmlFor="description">*description (optional)</label>
             <textarea
-              name="comment"
-              id="comment"
+              name="description"
+              id="description"
               rows="5"
               value={enteredDescription}
               onChange={descriptionChangeHandler}
