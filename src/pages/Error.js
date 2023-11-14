@@ -1,7 +1,22 @@
+import { useRouteError } from "react-router-dom";
+
 function ErrorPage() {
+  const error = useRouteError();
+
+  let title = "An error occured.";
+  let message = "OOps! Something wnet wrong!";
+
+  if (error.status === 500) {
+    message = JSON.parse(error.data).message;
+  } else if (error.status === 404) {
+    title = "Not found";
+    message = "Could not find resource or page.";
+  }
+
   return (
     <>
-      <h1>Error occured</h1>
+      <h1>{title}</h1>
+      <p>{message}</p>
     </>
   );
 }

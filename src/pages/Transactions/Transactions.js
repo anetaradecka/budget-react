@@ -6,6 +6,10 @@ import TransactionsGrid from "./TransactionsGrid";
 const Transactions = () => {
   let transactions = useLoaderData();
 
+  if (transactions.isError) {
+    return <p>{transactions.message}</p>;
+  }
+
   const addTransactionHandler = (transactionData) => {
     // TODO: add state handler on add transaction FE
     transactions = (transactions) => {
@@ -80,7 +84,11 @@ export default Transactions;
 export async function loader() {
   const response = await fetch("http://localhost:8080/transactions");
   if (!response.ok) {
-    //....
+    // return { isError: true, message: "Could not fetch data" };
+    throw new Response(
+      JSON.stringify({ message: "Could not fetch transactions" }),
+      { status: 500 }
+    );
   } else {
     const resData = await response.json();
     return resData.transactions;
