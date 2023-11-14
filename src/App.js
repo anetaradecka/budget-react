@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Transactions, {
   loader as transactionsLoader,
+  action as newTransactionAction,
 } from "./pages/Transactions/Transactions";
 import Dashboard from "./pages/Dashboard/Dashboard";
 // import Signup from "./pages/Auth/Signup";
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
         path: "/transactions",
         element: <Transactions />,
         loader: transactionsLoader,
+        action: newTransactionAction,
       },
       { path: "dashboard", element: <Dashboard /> },
     ],

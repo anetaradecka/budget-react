@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form } from "react-router-dom";
 
 import styles from "./AddTransactionForm.module.css";
 import ButtonPrimary from "../buttons/ButtonPrimary";
@@ -37,29 +38,9 @@ const AddTransactionForm = (props) => {
     setEnteredDescription(event.target.value);
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    if (enteredValue.length === 0 || enteredDate.length === 0) {
-      setIsValid(false);
-      return;
-    }
-    const transactionData = {
-      category: enteredCategory,
-      value: enteredValue,
-      date: new Date(enteredDate),
-      description: enteredDescription,
-    };
-
-    props.onAddTransaction(transactionData);
-    setEnteredCategory("");
-    setEnteredValue("");
-    setEnteredDate("");
-    setEnteredDescription("");
-  };
-
   return (
     <Container>
-      <form className={styles["transaction-form"]} onSubmit={submitHandler}>
+      <Form method="post" className={styles["transaction-form"]}>
         <div className={styles["form-control-group"]}>
           <div
             className={`${styles["form-control"]} ${
@@ -118,6 +99,7 @@ const AddTransactionForm = (props) => {
               value={enteredDescription}
               onChange={descriptionChangeHandler}
             ></textarea>
+            <input type="hidden" name="actionType" value="add"></input>
           </div>
         </div>
 
@@ -125,7 +107,7 @@ const AddTransactionForm = (props) => {
 
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <input type="hidden" name="type" value="<%= type %>" />
-      </form>
+      </Form>
     </Container>
   );
 };
