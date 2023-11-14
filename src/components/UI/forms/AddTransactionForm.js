@@ -5,6 +5,7 @@ import ButtonPrimary from "../buttons/ButtonPrimary";
 import Container from "../../layout/Container";
 
 const AddTransactionForm = (props) => {
+  //TODO: use useReducer instead of useState
   const [enteredCategory, setEnteredCategory] = useState("food");
   const [enteredValue, setEnteredValue] = useState("");
   const [enteredDate, setEnteredDate] = useState("");

@@ -1,20 +1,33 @@
-import Header from "./components/layout/Header/Header";
-import Sidebar from "./components/layout/Sidebar/Sidebar";
-import Main from "./components/layout/Main/Main";
-import Transactions from "./pages/Transactions/Transactions";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import Transactions, {
+  loader as transactionsLoader,
+} from "./pages/Transactions/Transactions";
+import Dashboard from "./pages/Dashboard/Dashboard";
+// import Signup from "./pages/Auth/Signup";
+// import Login from "./pages/Auth/Login";
+import RootLayout from "./pages/Root";
+import ErrorPage from "./pages/Error";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        path: "/transactions",
+        element: <Transactions />,
+        loader: transactionsLoader,
+      },
+      { path: "dashboard", element: <Dashboard /> },
+    ],
+  },
+]);
 
 function App() {
-  const pageTitle = "Transaction history";
-
-  return (
-    <div className="body">
-      <Sidebar />
-      <Header pageTitle={pageTitle} />
-      <Main>
-        <Transactions />
-      </Main>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

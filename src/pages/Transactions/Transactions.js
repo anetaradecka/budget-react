@@ -1,28 +1,16 @@
-import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 import AddTransactionForm from "../../components/UI/forms/AddTransactionForm";
 import TransactionsGrid from "./TransactionsGrid";
 
 const Transactions = () => {
-  const [transactions, setTransactions] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:8080/transactions")
-      .then((res) => {
-        if (res.status !== 200) {
-          throw new Error("Failed to fetch transactions.");
-        }
-        return res.json();
-      })
-      .then((resData) => {
-        setTransactions(resData.transactions);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  let transactions = useLoaderData();
 
   const addTransactionHandler = (transactionData) => {
-    setTransactions((transactions) => {
+    // TODO: add state handler on add transaction FE
+    transactions = (transactions) => {
       return [transactionData, ...transactions];
-    });
+    };
 
     let url = "http://localhost:8080/transactions/add-transaction";
     let method = "POST";
@@ -59,8 +47,8 @@ const Transactions = () => {
       return filteredTransactions;
     });
 
-    setTransactions(filteredTransactions);
-
+    transactions = filteredTransactions;
+    // setTransactions(filteredTransactions);
     let url = "http://localhost:8080/transactions/" + itemId;
     let method = "DELETE";
 
@@ -88,3 +76,13 @@ const Transactions = () => {
 };
 
 export default Transactions;
+
+export async function loader() {
+  const response = await fetch("http://localhost:8080/transactions");
+  if (!response.ok) {
+    //....
+  } else {
+    const resData = await response.json();
+    return resData.transactions;
+  }
+}

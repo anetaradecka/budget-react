@@ -2,6 +2,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 86%;
+  width: 85%;
   height: 80%;
+  background: var(--bg-color);
 }
