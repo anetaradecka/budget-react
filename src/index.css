@@ -7,13 +7,6 @@
   --btn-secondary: #8fb1cc;
   --btn-tertiary: #aeaeae;
 
-  /* --dark-blue: #759cc9;
-  --ceil: #8fb1cc;
-  --pastel-blue: #adc3d1;
-  --bright-gray: #eeecf1;
-  --silver-foil: #aeaeae;
-  --spanish-gray: #949494; */
-
   --font-primary: "Raleway", sans-serif;
   --text-base-color: #000;
   --link-color: #1f1f1f;
@@ -34,8 +27,8 @@
   box-sizing: border-box;
 }
 
-.body {
-  background: var(--bg-color);
+body {
+  background-color: var(--bg-color);
   font-family: var(--font-primary);
   font-size: 18px;
   height: 100vh;
@@ -58,6 +51,3 @@ a.active {
   justify-content: center;
   align-items: center;
 }
-
-
-

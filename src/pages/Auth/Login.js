@@ -100,7 +100,7 @@ const Login = () => {
             </button>
           </div>
           <div className={styles["signup-link"]}>
-            Not a member yet? <Link to="/auth/signup">Sign up</Link>
+            Not a member yet? <Link to="/signup">Sign up</Link>
           </div>
         </form>
       </div>

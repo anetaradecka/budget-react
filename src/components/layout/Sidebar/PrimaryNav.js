@@ -10,7 +10,7 @@ const PrimaryNav = () => {
           <span className=""></span>
           <NavLink
             className={({ isActive }) => (isActive ? styles.active : undefined)}
-            to="/dashboard"
+            to="/app/dashboard"
           >
             dashboard
           </NavLink>
@@ -19,7 +19,7 @@ const PrimaryNav = () => {
           <span className={styles.active}></span>
           <NavLink
             className={({ isActive }) => (isActive ? styles.active : undefined)}
-            to="/transactions"
+            to="/app/transactions"
           >
             transactions
           </NavLink>

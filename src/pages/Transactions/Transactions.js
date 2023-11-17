@@ -77,11 +77,8 @@ export async function action({ request, params }) {
         }
       );
 
-      if (!response.ok) {
-        throw new Response(
-          JSON.stringify({ message: "Could not send transaction data" }),
-          { status: 500 }
-        );
+      if (response === 422) {
+        return response;
       } else {
         return redirect("/transactions");
       }
