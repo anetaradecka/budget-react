@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Form } from "react-router-dom";
 
 import styles from "./Auth.module.css";
 
@@ -25,7 +25,7 @@ const Signup = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    fetch("http://localhost:8080/auth/signup", {
+    fetch("http://localhost:8080/signup", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const Signup = () => {
         <div className={styles.title}>
           <span>Get started for free</span>
         </div>
-        <form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler}>
           <div className={styles.row}>
             <label htmlFor="name">How you would like to be called?</label>
             <input
@@ -112,7 +112,8 @@ const Signup = () => {
           <div className={styles["signup-link"]}>
             Already a member? <Link to="/login">Log in</Link>
           </div>
-        </form>
+          <Link to="/">Go back</Link>
+        </Form>
       </div>
     </div>
   );

@@ -102,6 +102,7 @@ const Login = () => {
           <div className={styles["signup-link"]}>
             Not a member yet? <Link to="/signup">Sign up</Link>
           </div>
+          <Link to="/">Go back</Link>
         </form>
       </div>
     </div>
