@@ -2,6 +2,7 @@ import { useLoaderData, redirect } from "react-router-dom";
 
 import AddTransactionForm from "../../components/UI/forms/AddTransactionForm";
 import TransactionsGrid from "./TransactionsGrid";
+import { getAuthToken } from "../../util/auth";
 
 const Transactions = () => {
   let transactions = useLoaderData();
@@ -22,7 +23,14 @@ export default Transactions;
 
 // Fetching data on component load
 export async function loader() {
-  const response = await fetch("http://localhost:8080/transactions");
+  const token = getAuthToken();
+
+  const response = await fetch("http://localhost:8080/transactions", {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
   if (!response.ok) {
     throw new Response(
       JSON.stringify({ message: "Could not fetch transactions" }),

@@ -18,6 +18,7 @@ const AddTransactionForm = (props) => {
             ))}
           </ul>
         )}
+        {actionData && actionData.msg && <p>{actionData.msg}</p>}
         <div className={styles["form-control-group"]}>
           <div
             className={`${styles["form-control"]}`}

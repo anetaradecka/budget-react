@@ -1,67 +1,21 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Form, redirect, json, useActionData } from "react-router-dom";
 
 import styles from "./Auth.module.css";
 
 const Login = () => {
-  const [enteredEmail, setEmail] = useState();
-  const [enteredPassword, setPassword] = useState();
-  const navigate = useNavigate();
-
-  const emailInputChangeHandler = (event) => {
-    //resetErrorMsg(event);
-    setEmail(event.target.value);
-  };
-
-  const passwordInputChangeHandler = (event) => {
-    //resetErrorMsg(event);
-    setPassword(event.target.value);
-  };
-
-  function navigateHandler() {
-    navigate("/transactions");
-  }
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-    fetch("http://localhost:8080/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 422) {
-          throw new Error("Validation failed. Check login data.");
-        }
-        if (res.status !== 200 && res.status !== 201) {
-          console.log("Error!");
-          throw new Error("Logging a user failed!");
-        }
-        return res.json();
-      })
-      .then((resData) => {
-        console.log(resData);
-        navigateHandler();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const errors = useActionData();
 
   return (
     <div className={styles["form-container"]}>
       <div className={styles.wrapper}>
-        <div className={styles["error-msg"]}></div>
+        <div className={styles["error-msg"]}>
+          {errors && errors.message && <p>{errors.message}</p>}
+        </div>
 
         <div className={styles.title}>
           <span>Welcome!</span>
         </div>
-        <form className={styles.form} onSubmit={submitHandler}>
+        <Form method="POST" className={styles.form}>
           <div className={styles.row}>
             <label for="email" placeholder="Email Adress">
               Email Address
@@ -71,7 +25,6 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              onChange={emailInputChangeHandler}
             />
           </div>
           <div className={styles.row}>
@@ -83,7 +36,6 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
-              onChange={passwordInputChangeHandler}
             />
           </div>
           <div className={styles.pass}>
@@ -103,10 +55,42 @@ const Login = () => {
             Not a member yet? <Link to="/signup">Sign up</Link>
           </div>
           <Link to="/">Go back</Link>
-        </form>
+        </Form>
       </div>
     </div>
   );
 };
 
 export default Login;
+
+export async function action({ request }) {
+  const data = await request.formData();
+
+  const response = await fetch("http://localhost:8080/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: data.get("email"),
+      password: data.get("password"),
+    }),
+  });
+
+  //show any errors occured while trying to auth the user
+  if (response.status === 422 || response.status === 401) {
+    return response;
+  }
+
+  if (!response.ok) {
+    throw json({ message: "Logging user failed." }, { status: 500 });
+  }
+
+  // before we redirect the user we must extract their user_id and token
+  const resData = await response.json();
+  const token = resData.token;
+
+  localStorage.setItem("token", token);
+
+  return redirect("/app");
+}

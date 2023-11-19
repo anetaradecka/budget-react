@@ -4,7 +4,7 @@ function ErrorPage() {
   const error = useRouteError();
 
   let title = "An error occured.";
-  let message = "OOps! Something wnet wrong!";
+  let message = "Ops! Something went wrong!";
 
   if (error.status === 500) {
     message = JSON.parse(error.data).message;

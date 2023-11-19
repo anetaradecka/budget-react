@@ -5,12 +5,12 @@ import Transactions, {
   action as newTransactionAction,
 } from "./pages/Transactions/Transactions";
 import Dashboard from "./pages/Dashboard/Dashboard";
-// import Auth from "./pages/Auth/Auth";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import LandingPage from "./pages/Landing";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
+import Login, { action as loginAction } from "./pages/Auth/Login";
+import Signup, { action as signupAction } from "./pages/Auth/Signup";
+import { action as logoutAction } from "./pages/Logout";
 
 const router = createBrowserRouter([
   {
@@ -21,15 +21,19 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    index: true,
     element: <Login />,
     errorElement: <ErrorPage />,
+    action: loginAction,
   },
   {
     path: "signup",
-    index: true,
     element: <Signup />,
     errorElement: <ErrorPage />,
+    action: signupAction,
+  },
+  {
+    path: "logout",
+    action: logoutAction,
   },
   {
     path: "app",
