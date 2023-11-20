@@ -89,7 +89,6 @@ export async function action({ request }) {
   // before we redirect the user we must extract their user_id and token
   const resData = await response.json();
   const token = resData.token;
-
   localStorage.setItem("token", token);
 
   return redirect("/app");

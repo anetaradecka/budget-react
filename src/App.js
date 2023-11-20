@@ -11,6 +11,7 @@ import LandingPage from "./pages/Landing";
 import Login, { action as loginAction } from "./pages/Auth/Login";
 import Signup, { action as signupAction } from "./pages/Auth/Signup";
 import { action as logoutAction } from "./pages/Logout";
+import { checkAuthLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
@@ -20,23 +21,24 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "login",
+    path: "/login",
     element: <Login />,
     errorElement: <ErrorPage />,
     action: loginAction,
   },
   {
-    path: "signup",
+    path: "/signup",
     element: <Signup />,
     errorElement: <ErrorPage />,
     action: signupAction,
   },
   {
-    path: "logout",
+    path: "/logout",
     action: logoutAction,
+    loader: checkAuthLoader,
   },
   {
-    path: "app",
+    path: "/app",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
@@ -49,6 +51,7 @@ const router = createBrowserRouter([
       },
       { path: "dashboard", element: <Dashboard /> },
     ],
+    loader: checkAuthLoader,
   },
 ]);
 
