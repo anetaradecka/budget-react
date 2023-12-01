@@ -2,7 +2,7 @@ import { useLoaderData, redirect } from "react-router-dom";
 
 import AddTransactionForm from "../../components/UI/forms/AddTransactionForm";
 import TransactionsGrid from "./TransactionsGrid";
-// import { getAuthToken } from "../../util/auth";
+import { getAuthToken } from "../../util/auth";
 
 const Transactions = () => {
   let transactions = useLoaderData();
@@ -23,12 +23,12 @@ export default Transactions;
 
 // Fetching data on component load
 export async function loader() {
-  // const token = getAuthToken();
+  const token = getAuthToken();
 
   const response = await fetch("http://localhost:8080/transactions", {
-    // headers: {
-    //   Authorization: "Bearer " + token,
-    // },
+    headers: {
+      Authorization: "Bearer " + token,
+    },
   });
 
   if (!response.ok) {
@@ -44,6 +44,7 @@ export async function loader() {
 
 // Actions taken basen on request POST/DELETE method
 export async function action({ request, params }) {
+  const token = getAuthToken();
   const requestData = await request.formData();
   const selectedAction = requestData.get("actionType");
 
@@ -55,7 +56,12 @@ export async function action({ request, params }) {
 
       response = await fetch(
         "http://localhost:8080/transactions/" + transactionId,
-        { method: request.method }
+        {
+          method: request.method,
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -80,6 +86,7 @@ export async function action({ request, params }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({ submitData }),
         }

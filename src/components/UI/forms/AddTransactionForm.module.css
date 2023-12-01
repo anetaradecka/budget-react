@@ -6,7 +6,7 @@
 
 form {
   width: 100%;
-  min-height: 510px;
+  /* min-height: 510px; */
   margin: 0;
   display: flex;
   justify-content: space-between;
