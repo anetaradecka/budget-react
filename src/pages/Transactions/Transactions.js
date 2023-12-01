@@ -95,7 +95,7 @@ export async function action({ request, params }) {
       if (response === 422) {
         return response;
       } else {
-        return redirect("/transactions");
+        return redirect("/app/transactions");
       }
 
     default:
