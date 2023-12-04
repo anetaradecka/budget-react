@@ -3,14 +3,21 @@ import { Link, Form, redirect, json, useActionData } from "react-router-dom";
 import styles from "./Auth.module.css";
 
 const Signup = () => {
+
   // returns data in case of 422 or 401
-  const errors = useActionData();
+  const data = useActionData();
 
   return (
     <div className={styles["form-container"]}>
       <div className={styles.wrapper}>
         <div className={styles["error-msg"]}>
-          {errors && errors.message && <p>{errors.message}</p>}
+          {data && data.data && (
+            <ul>
+              {data.data.map((err) => (
+                <li key={err.msg}>{err.msg}</li>
+              ))}
+            </ul>
+          )}
         </div>
         <div className={styles.title}>
           <span>Get started for free</span>
@@ -18,7 +25,11 @@ const Signup = () => {
         <Form method="put">
           <div className={styles.row}>
             <label htmlFor="name">How you would like to be called?</label>
-            <input type="text" name="name" id="name" />
+            <input
+              type="text"
+              name="name"
+              id="name"
+            />
           </div>
           <div className={styles.row}>
             <label htmlFor="email">Email Address</label>

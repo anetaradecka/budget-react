@@ -77,7 +77,7 @@ export async function action({ request }) {
     }),
   });
 
-  //show any errors occured while trying to auth the user
+  //show any errors occured while trying to auth the user and didn't get ok response from BE
   if (response.status === 422 || response.status === 401) {
     return response;
   }
@@ -90,6 +90,7 @@ export async function action({ request }) {
   const resData = await response.json();
   const token = resData.token;
   localStorage.setItem("token", token);
+
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 1);
   localStorage.setItem("expiration", expiration.toISOString());
