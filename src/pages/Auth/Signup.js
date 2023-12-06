@@ -1,8 +1,14 @@
 import { Link, Form, redirect, json, useActionData } from "react-router-dom";
 import { useState } from "react";
-import validator from "validator";
 
+import {
+  isValidEmail,
+  isNotEmpty,
+  isValidPassword,
+  isEqualToOtherValue,
+} from "../../util/validation";
 import styles from "./Auth.module.css";
+import Input from "./Input";
 
 const Signup = () => {
   // returns data in case of 422 or 401
@@ -43,35 +49,18 @@ const Signup = () => {
     }));
   }
 
-  function passwordValidation(password) {
-    const lowerCase = /[a-z]/g;
-    const upperCase = /[A-Z]/g;
-    const numbers = /[0-9]/g;
-
-    if (
-      password.match(lowerCase) &&
-      password.match(upperCase) &&
-      password.match(numbers) &&
-      password.length >= 5
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  const nameIsInvalid = didEdit.name && enteredValues.name === "";
-  const emailIsInvalid =
-    didEdit.email && validator.isEmail(enteredValues.email) === false;
+  const nameIsInvalid = didEdit.name && !isNotEmpty(enteredValues.name);
+  const emailIsInvalid = didEdit.email && !isValidEmail(enteredValues.email);
   const passwordIsInvalid =
-    didEdit.password && passwordValidation(enteredValues.password) === false;
+    didEdit.password && !isValidPassword(enteredValues.password);
   const passwordsNotEqual =
     didEdit.confirmPassword &&
-    enteredValues.password !== enteredValues.confirmPassword;
+    !isEqualToOtherValue(enteredValues.password, enteredValues.confirmPassword);
 
   return (
     <div className={styles["form-container"]}>
       <div className={styles.wrapper}>
+        {/* display BE errors */}
         <div className={styles["error-msg"]}>
           {data && data.data && (
             <ul>
@@ -85,7 +74,58 @@ const Signup = () => {
           <span>Get started for free</span>
         </div>
         <Form method="put">
-          <div className={styles.row}>
+          <Input
+            label="How would you like to be called?"
+            id="name"
+            type="text"
+            name="name"
+            onChange={(event) =>
+              handleInputValidation("name", event.target.value)
+            }
+            value={enteredValues.name}
+            onBlur={() => handleInputBlur("name")}
+            error={nameIsInvalid && "Please enter your name."}
+          />
+          <Input
+            label="Email address"
+            id="email"
+            type="email"
+            name="email"
+            onChange={(event) =>
+              handleInputValidation("email", event.target.value)
+            }
+            value={enteredValues.email}
+            onBlur={() => handleInputBlur("email")}
+            error={emailIsInvalid && "This is not a valid email format."}
+          />
+          <Input
+            label="Password"
+            id="password"
+            type="password"
+            name="password"
+            onChange={(event) =>
+              handleInputValidation("password", event.target.value)
+            }
+            value={enteredValues.password}
+            onBlur={() => handleInputBlur("password")}
+            error={
+              passwordIsInvalid &&
+              "Password must be at least 5 characters long and must contain at least one A-Z, one a-z letter and one /1-9/ number."
+            }
+          />
+          <Input
+            label="Confirm password"
+            id="confirmPassword"
+            type="password"
+            name="confirmPassword"
+            onChange={(event) =>
+              handleInputValidation("confirmPassword", event.target.value)
+            }
+            value={enteredValues.confirmPassword}
+            onBlur={() => handleInputBlur("confirmPassword")}
+            error={passwordsNotEqual && "Entered passwords must be equal."}
+          />
+          {/* <div className={styles.row}>
             <label htmlFor="name">How would you like to be called?</label>
             <input
               type="text"
@@ -102,8 +142,8 @@ const Signup = () => {
                 <p className={styles["error-msg"]}>Please enter your name.</p>
               )}
             </div>
-          </div>
-          <div className={styles.row}>
+          </div> */}
+          {/* <div className={styles.row}>
             <label htmlFor="email">Email Address</label>
             <input
               type="email"
@@ -155,7 +195,7 @@ const Signup = () => {
             {passwordsNotEqual && (
               <p className={styles["error-msg"]}>Passwords must be the same.</p>
             )}
-          </div>
+          </div> */}
 
           <div className={styles.row}>
             {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
