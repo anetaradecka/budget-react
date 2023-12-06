@@ -1,11 +1,11 @@
 import { Link, Form, redirect, json, useActionData } from "react-router-dom";
-import { useState } from "react";
+import { useInput } from "../../hooks/useInput";
 
 import {
   isValidEmail,
   isNotEmpty,
   isValidPassword,
-  isEqualToOtherValue,
+  // isEqualToOtherValue,
 } from "../../util/validation";
 import styles from "./Auth.module.css";
 import Input from "./Input";
@@ -13,49 +13,34 @@ import Input from "./Input";
 const Signup = () => {
   // returns data in case of 422 or 401
   const data = useActionData();
-
-  // FE input fields validation
-  const [enteredValues, setEnteredValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [didEdit, setDidEdit] = useState({
-    name: false,
-    email: false,
-    password: false,
-    confirmPassword: false,
-  });
-
-  function handleInputValidation(identifier, value) {
-    setEnteredValues((previousValues) => ({
-      ...previousValues,
-      // sets the field to be modified dynamically
-      [identifier]: value,
-    }));
-
-    setDidEdit((previousValues) => ({
-      ...previousValues,
-      [identifier]: false,
-    }));
-  }
-
-  function handleInputBlur(identifier) {
-    setDidEdit((previousState) => ({
-      ...previousState,
-      [identifier]: true,
-    }));
-  }
-
-  const nameIsInvalid = didEdit.name && !isNotEmpty(enteredValues.name);
-  const emailIsInvalid = didEdit.email && !isValidEmail(enteredValues.email);
-  const passwordIsInvalid =
-    didEdit.password && !isValidPassword(enteredValues.password);
-  const passwordsNotEqual =
-    didEdit.confirmPassword &&
-    !isEqualToOtherValue(enteredValues.password, enteredValues.confirmPassword);
+  // custom hook name
+  const {
+    value: nameValue,
+    handleInputValidation: handleNameChange,
+    handleInputBlur: handleNameBlur,
+    hasError: nameHasError,
+  } = useInput("", isNotEmpty);
+  // custom hook email
+  const {
+    value: emailValue,
+    handleInputValidation: handleEmailChange,
+    handleInputBlur: handleEmailBlur,
+    hasError: emailHasError,
+  } = useInput("", isValidEmail);
+  // custom hook password
+  const {
+    value: passwordValue,
+    handleInputValidation: handlePasswordChange,
+    handleInputBlur: handlePasswordBlur,
+    hasError: passwordHasError,
+  } = useInput("", isValidPassword);
+  // custom hook confirm password - How to pass both password and confirmPassword?
+  // const {
+  //   value: confirmPasswordValue,
+  //   handleInputValidation: handleConfirmPasswordChange,
+  //   handleInputBlur: handleConfirmPasswordBlur,
+  //   hasError: confirmPasswordHasError,
+  // } = useInput("", isEqualToOtherValue);
 
   return (
     <div className={styles["form-container"]}>
@@ -79,124 +64,47 @@ const Signup = () => {
             id="name"
             type="text"
             name="name"
-            onChange={(event) =>
-              handleInputValidation("name", event.target.value)
-            }
-            value={enteredValues.name}
-            onBlur={() => handleInputBlur("name")}
-            error={nameIsInvalid && "Please enter your name."}
+            onChange={handleNameChange}
+            value={nameValue}
+            onBlur={handleNameBlur}
+            error={nameHasError && "Please enter your name."}
           />
           <Input
             label="Email address"
             id="email"
             type="email"
             name="email"
-            onChange={(event) =>
-              handleInputValidation("email", event.target.value)
-            }
-            value={enteredValues.email}
-            onBlur={() => handleInputBlur("email")}
-            error={emailIsInvalid && "This is not a valid email format."}
+            onChange={handleEmailChange}
+            value={emailValue}
+            onBlur={handleEmailBlur}
+            error={emailHasError && "This is not a valid email format."}
           />
           <Input
             label="Password"
             id="password"
             type="password"
             name="password"
-            onChange={(event) =>
-              handleInputValidation("password", event.target.value)
-            }
-            value={enteredValues.password}
-            onBlur={() => handleInputBlur("password")}
+            onChange={handlePasswordChange}
+            value={passwordValue}
+            onBlur={handlePasswordBlur}
             error={
-              passwordIsInvalid &&
+              passwordHasError &&
               "Password must be at least 5 characters long and must contain at least one A-Z, one a-z letter and one /1-9/ number."
             }
           />
-          <Input
+          {/* TODO: confirm passoword logic */}
+          {/* <Input
             label="Confirm password"
             id="confirmPassword"
             type="password"
             name="confirmPassword"
-            onChange={(event) =>
-              handleInputValidation("confirmPassword", event.target.value)
+            onChange={handleConfirmPasswordChange}
+            value={confirmPasswordValue}
+            onBlur={handleConfirmPasswordBlur}
+            error={
+              confirmPasswordHasError && "Entered passwords must be equal."
             }
-            value={enteredValues.confirmPassword}
-            onBlur={() => handleInputBlur("confirmPassword")}
-            error={passwordsNotEqual && "Entered passwords must be equal."}
-          />
-          {/* <div className={styles.row}>
-            <label htmlFor="name">How would you like to be called?</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              onChange={(event) =>
-                handleInputValidation("name", event.target.value)
-              }
-              value={enteredValues.name}
-              onBlur={() => handleInputBlur("name")}
-            />
-            <div>
-              {nameIsInvalid && (
-                <p className={styles["error-msg"]}>Please enter your name.</p>
-              )}
-            </div>
-          </div> */}
-          {/* <div className={styles.row}>
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              onChange={(event) =>
-                handleInputValidation("email", event.target.value)
-              }
-              value={enteredValues.email}
-              onBlur={() => handleInputBlur("email")}
-            />
-            {emailIsInvalid && (
-              <p className={styles["error-msg"]}>
-                This is not a valid email format.
-              </p>
-            )}
-          </div>
-          <div className={styles.row}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={(event) =>
-                handleInputValidation("password", event.target.value)
-              }
-              value={enteredValues.password}
-              onBlur={() => handleInputBlur("password")}
-            />
-            {passwordIsInvalid && (
-              <p className={styles["error-msg"]}>
-                Password must be at least 5 characters long and must contain at
-                least one /A-Z/, one /a-z/ letter and at least one /1-9/ number.
-              </p>
-            )}
-          </div>
-          <div className={styles.row}>
-            <label htmlFor="confirmPassword">Confirm password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              onChange={(event) =>
-                handleInputValidation("confirmPassword", event.target.value)
-              }
-              value={enteredValues.confirmPassword}
-              onBlur={() => handleInputBlur("confirmPassword")}
-            />
-            {passwordsNotEqual && (
-              <p className={styles["error-msg"]}>Passwords must be the same.</p>
-            )}
-          </div> */}
-
+          /> */}
           <div className={styles.row}>
             {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
             <button className={styles.button} type="submit" value="Login">
