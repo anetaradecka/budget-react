@@ -1,29 +1,12 @@
-import { NavLink } from "react-router-dom";
-
+import NavItem from "./NavItem";
 import styles from "./PrimaryNav.module.css";
 
 const PrimaryNav = () => {
   return (
     <nav id={styles["primary-nav"]}>
       <ul>
-        <li className={styles["nav-item"]}>
-          <span className=""></span>
-          <NavLink
-            className={({ isActive }) => (isActive ? styles.active : undefined)}
-            to="/app/dashboard"
-          >
-            dashboard
-          </NavLink>
-        </li>
-        <li className={styles["nav-item"]}>
-          <span className={styles.active}></span>
-          <NavLink
-            className={({ isActive }) => (isActive ? styles.active : undefined)}
-            to="/app/transactions"
-          >
-            transactions
-          </NavLink>
-        </li>
+        <NavItem pathTo="dashboard" linkName="dashboard"></NavItem>
+        <NavItem pathTo="transactions" linkName="dashboard"></NavItem>
       </ul>
     </nav>
   );
