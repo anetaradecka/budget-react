@@ -46,15 +46,16 @@ const Signup = () => {
     <div className={styles["form-container"]}>
       <div className={styles.wrapper}>
         {/* display BE errors */}
-        <div className={styles["error-msg"]}>
-          {data && data.data && (
+        {/* <div className={styles["error-msg"]}> */}
+        {data && data.data && (
+          <div className={styles["error-msg"]}>
             <ul>
               {data.data.map((err) => (
                 <li key={err.msg}>{err.msg}</li>
               ))}
             </ul>
-          )}
-        </div>
+          </div>
+        )}
         <div className={styles.title}>
           <span>Get started for free</span>
         </div>
@@ -114,7 +115,7 @@ const Signup = () => {
           <div className={styles["signup-link"]}>
             Already a member? <Link to="/login">Log in</Link>
           </div>
-          <Link to="/">Go back</Link>
+          {/* <Link to="/">Go back</Link> */}
         </Form>
       </div>
     </div>

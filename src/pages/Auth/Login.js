@@ -7,11 +7,13 @@ const Login = () => {
 
   return (
     <div className={styles["form-container"]}>
-      <div className={styles.wrapper}>
+      {errors && errors.message && (
         <div className={styles["error-msg"]}>
-          {errors && errors.message && <p>{errors.message}</p>}
+          <p>{errors.message}</p>
         </div>
+      )}
 
+      <div className={styles.wrapper}>
         <div className={styles.title}>
           <span>Welcome!</span>
         </div>
@@ -54,7 +56,7 @@ const Login = () => {
           <div className={styles["signup-link"]}>
             Not a member yet? <Link to="/signup">Sign up</Link>
           </div>
-          <Link to="/">Go back</Link>
+          {/* <Link to="/">Go back</Link> */}
         </Form>
       </div>
     </div>

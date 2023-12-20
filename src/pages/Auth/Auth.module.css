@@ -9,8 +9,10 @@
 
 .wrapper {
   width: 100%;
+  min-width: 400px;
+  min-height: 523px;
   background: #fff;
-  padding-left: 25px;
+  /* padding-left: 25px; */
 }
 
 .wrapper .title {
@@ -21,6 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding-left: 30px;
 }
 
 .wrapper form {
@@ -71,6 +74,7 @@ form .row label {
 
 .wrapper form .button {
   color: #fff;
+  min-width: 177px;
   font-size: 17px;
   font-weight: 500;
   padding: 12px 30px;
@@ -87,6 +91,7 @@ form .button:hover {
 .wrapper form .signup-link {
   margin-top: 20px;
   font-size: 17px;
+  text-align: center;
 }
 
 .wrapper form .signup-link a {
@@ -95,9 +100,17 @@ form .button:hover {
 }
 
 .error-msg {
+  min-width: 400px;
+  height: auto;
+  top: -30px;
+  margin-bottom: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: rgb(249, 92, 92);
+  background-color: rgb(255, 232, 232);
   font-size: 12px;
   color: red;
-  padding: 10px 0 0 0;
+  padding: 10px;
 }
 
 .error-msg li {
