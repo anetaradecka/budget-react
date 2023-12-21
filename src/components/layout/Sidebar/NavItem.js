@@ -6,7 +6,7 @@ const NavItem = (props) => {
   return (
     <li className={styles["nav-item"]}>
       <NavLink
-        to={"/app/" + props.pathTo}
+        to={"/app" + props.pathTo}
         className={({ isActive }) => (isActive ? styles.active : "")}
         children={({ isActive }) => {
           return (
@@ -16,6 +16,7 @@ const NavItem = (props) => {
             </>
           );
         }}
+        end
       ></NavLink>
     </li>
   );

@@ -1,11 +1,19 @@
-import { Outlet, useLoaderData, useSubmit } from "react-router-dom";
+import {
+  Outlet,
+  useLoaderData,
+  useSubmit,
+  useLocation,
+} from "react-router-dom";
 import { useEffect } from "react";
 import Header from "./../components/layout/Header/Header";
 import Sidebar from "./../components/layout/Sidebar/Sidebar";
 import Main from "./../components/layout/Main/Main";
+import Dashboard from "./Dashboard/Dashboard";
 import { getTokenDuration } from "../util/auth";
 
 function RootLayout() {
+  const location = useLocation();
+  const { pathname } = location;
   const token = useLoaderData();
   const submit = useSubmit();
 
@@ -29,9 +37,7 @@ function RootLayout() {
     <>
       <Header />
       <Sidebar />
-      <Main>
-        <Outlet />
-      </Main>
+      <Main>{pathname === "/app" ? <Dashboard /> : <Outlet />}</Main>
     </>
   );
 }

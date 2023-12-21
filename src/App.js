@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         loader: transactionsLoader,
         action: newTransactionAction,
       },
-      { path: "dashboard", element: <Dashboard /> },
+      // { path: "dashboard", element: <Dashboard /> },
     ],
     loader: checkAuthLoader,
   },
