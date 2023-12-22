@@ -4,7 +4,7 @@ const UserProfile = (props) => {
   return (
     <div className={styles["user-profile"]}>
       <div className={styles["user-avatar"]}>
-        <img id={styles.avatar} src="john-doe.jpg" alt="user profile" />
+        <img id={styles.avatar} src="default.jpg" alt="user profile" />
       </div>
     </div>
   );

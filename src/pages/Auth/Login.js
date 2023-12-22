@@ -90,8 +90,9 @@ export async function action({ request }) {
 
   // before we redirect the user we must extract their user_id and token
   const resData = await response.json();
-  const token = resData.token;
-  localStorage.setItem("token", token);
+
+  localStorage.setItem("token", resData.token);
+  localStorage.setItem("userName", resData.name);
 
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 1);

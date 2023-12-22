@@ -5,13 +5,14 @@ import { TitleContext } from "../../../contex/title-context";
 
 const Header = () => {
   const titleCtx = useContext(TitleContext);
+  const userName = localStorage.getItem("userName");
 
   return (
     <header>
       <div id={styles["first-row"]}>
         <div className={styles["h-group"]}>
-          <h1>Best Finance App</h1>
-          <h2>Hello, John Doe!</h2>
+          <h1>Simple Budget App</h1>
+          <h2>Hello, {userName}!</h2>
         </div>
         <SecondaryNav />
       </div>
