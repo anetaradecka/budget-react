@@ -44,18 +44,17 @@ const Signup = () => {
 
   return (
     <div className={styles["form-container"]}>
+      {/* display BE errors */}
+      {data && data.data && (
+        <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
+          <ul>
+            {data.data.map((err) => (
+              <li key={err.msg}>{err.msg}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className={styles.wrapper}>
-        {/* display BE errors */}
-        {/* <div className={styles["error-msg"]}> */}
-        {data && data.data && (
-          <div className={styles["error-msg"]}>
-            <ul>
-              {data.data.map((err) => (
-                <li key={err.msg}>{err.msg}</li>
-              ))}
-            </ul>
-          </div>
-        )}
         <div className={styles.title}>
           <span>Get started for free</span>
         </div>

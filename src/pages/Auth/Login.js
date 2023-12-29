@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <div className={styles["form-container"]}>
       {errors && errors.message && (
-        <div className={styles["error-msg"]}>
+        <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
           <p>{errors.message}</p>
         </div>
       )}
@@ -22,29 +22,19 @@ const Login = () => {
             <label htmlFor="email" placeholder="Email Adress">
               Email Address
             </label>
-            <input
-              className="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : ''%>"
-              type="email"
-              name="email"
-              id="email"
-            />
+            <input type="email" name="email" id="email" />
           </div>
           <div className={styles.row}>
             <label htmlFor="email" placeholder="password">
               Password
             </label>
-            <input
-              className="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : ''%>"
-              type="password"
-              name="password"
-              id="password"
-            />
+            <input type="password" name="password" id="password" />
           </div>
           <div className={styles.pass}>
             <a href="/reset-password">Forgot password?</a>
           </div>
           <div className={styles.row}>
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
             <button
               className={`${styles.button} ${styles["btn-primary"]}`}
               type="submit"
@@ -56,7 +46,6 @@ const Login = () => {
           <div className={styles["signup-link"]}>
             Not a member yet? <Link to="/signup">Sign up</Link>
           </div>
-          {/* <Link to="/">Go back</Link> */}
         </Form>
       </div>
     </div>
