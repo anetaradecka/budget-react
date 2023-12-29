@@ -1,12 +1,29 @@
 import { Link, Form, redirect, json, useActionData } from "react-router-dom";
-
+import { useInput } from "../../hooks/useInput";
+import { isValidEmail, isNotEmpty } from "../../util/validation";
 import styles from "./Auth.module.css";
+import Input from "./Input";
 
 const Login = () => {
   const errors = useActionData();
+  // custom hook email
+  const {
+    value: emailValue,
+    handleInputValidation: handleEmailChange,
+    handleInputBlur: handleEmailBlur,
+    hasError: emailHasError,
+  } = useInput("", isValidEmail);
+  // custom hook password
+  const {
+    value: passwordValue,
+    handleInputValidation: handlePasswordChange,
+    handleInputBlur: handlePasswordBlur,
+    hasError: passwordHasError,
+  } = useInput("", isNotEmpty);
 
   return (
     <div className={styles["form-container"]}>
+      {/* displays BE errors */}
       {errors && errors.message && (
         <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
           <p>{errors.message}</p>
@@ -18,18 +35,26 @@ const Login = () => {
           <span>Welcome!</span>
         </div>
         <Form method="POST" className={styles.form}>
-          <div className={styles.row}>
-            <label htmlFor="email" placeholder="Email Adress">
-              Email Address
-            </label>
-            <input type="email" name="email" id="email" />
-          </div>
-          <div className={styles.row}>
-            <label htmlFor="email" placeholder="password">
-              Password
-            </label>
-            <input type="password" name="password" id="password" />
-          </div>
+          <Input
+            label="Email-address"
+            id="email"
+            type="email"
+            name="email"
+            onChange={handleEmailChange}
+            value={emailValue}
+            onBlur={handleEmailBlur}
+            error={emailHasError && "This is not a valid email address."}
+          />
+          <Input
+            label="Password"
+            id="password"
+            type="password"
+            name="password"
+            onChange={handlePasswordChange}
+            value={passwordValue}
+            onBlur={handlePasswordBlur}
+            error={passwordHasError && "Password cannot be empty."}
+          />
           <div className={styles.pass}>
             <a href="/reset-password">Forgot password?</a>
           </div>

@@ -44,7 +44,7 @@ const Signup = () => {
 
   return (
     <div className={styles["form-container"]}>
-      {/* display BE errors */}
+      {/* displays BE errors */}
       {data && data.data && (
         <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
           <ul>
