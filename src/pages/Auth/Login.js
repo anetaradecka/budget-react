@@ -59,7 +59,7 @@ const Login = () => {
             <a href="/reset-password">Forgot password?</a>
           </div>
           <div className={styles.row}>
-            {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
+            {/* <input type="hidden" name="_csrf" value={req.csrfToken()} /> */}
             <button
               className={`${styles.button} ${styles["btn-primary"]}`}
               type="submit"
@@ -82,10 +82,20 @@ export default Login;
 export async function action({ request }) {
   const data = await request.formData();
 
+  // const getCSRFToken = async () => {
+  //   const response = await fetch("http://localhost:8080/getCSRFToken");
+  //   console.log(response);
+  //   return response.data.CSRFToken;
+  // };
+
+  // const csrfToken = getCSRFToken();
+  // console.log(csrfToken);
+
   const response = await fetch("http://localhost:8080/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      // "X-CSRF-Token": csrfToken,
     },
     body: JSON.stringify({
       email: data.get("email"),

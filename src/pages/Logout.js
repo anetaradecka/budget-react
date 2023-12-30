@@ -4,5 +4,5 @@ export function action() {
   localStorage.removeItem("token");
   localStorage.removeItem("expiration");
   localStorage.removeItem("userName");
-  return redirect("/login");
+  return redirect("/");
 }
