@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
 
 import Transactions, {
   loader as transactionsLoader,
@@ -54,8 +58,20 @@ const router = createBrowserRouter([
   },
 ]);
 
+// export const LocationDisplay = () => {
+//   const location = useLocation();
+
+//   return <div data-testid="location-display">{location.pathname}</div>;
+// };
+
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router}>
+        {/* <LocationDisplay /> */}
+      </RouterProvider>
+    </>
+  );
 }
 
 export default App;

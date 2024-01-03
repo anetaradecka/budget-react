@@ -1,4 +1,11 @@
-import { Link, Form, redirect, json, useActionData } from "react-router-dom";
+import {
+  Link,
+  Form,
+  redirect,
+  json,
+  useActionData,
+  useLocation,
+} from "react-router-dom";
 import { useInput } from "../../hooks/useInput";
 
 import {
@@ -41,6 +48,12 @@ const Signup = () => {
   //   handleInputBlur: handleConfirmPasswordBlur,
   //   hasError: confirmPasswordHasError,
   // } = useInput("", isEqualToOtherValue);
+
+  const LocationDisplay = () => {
+    const location = useLocation();
+
+    return <div data-testid="location-display">{location.pathname}</div>;
+  };
 
   return (
     <div className={styles["form-container"]}>
@@ -112,11 +125,14 @@ const Signup = () => {
             </button>
           </div>
           <div className={styles["signup-link"]}>
-            Already a member? <Link to="/">Log in</Link>
+            Already a member?{" "}
+            <Link to="/" data-testid="auth-link">
+              Log in
+            </Link>
           </div>
-          {/* <Link to="/">Go back</Link> */}
         </Form>
       </div>
+      <LocationDisplay />
     </div>
   );
 };

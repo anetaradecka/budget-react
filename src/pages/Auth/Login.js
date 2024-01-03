@@ -40,6 +40,7 @@ const Login = () => {
             id="email"
             type="email"
             name="email"
+            data-testid="email"
             onChange={handleEmailChange}
             value={emailValue}
             onBlur={handleEmailBlur}
@@ -50,6 +51,7 @@ const Login = () => {
             id="password"
             type="password"
             name="password"
+            data-testid="password"
             onChange={handlePasswordChange}
             value={passwordValue}
             onBlur={handlePasswordBlur}
@@ -69,7 +71,10 @@ const Login = () => {
             </button>
           </div>
           <div className={styles["signup-link"]}>
-            Not a member yet? <Link to="/signup">Sign up</Link>
+            Not a member yet?{" "}
+            <Link to="/signup" data-testid="auth-link">
+              Sign up
+            </Link>
           </div>
         </Form>
       </div>
