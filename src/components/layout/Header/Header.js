@@ -11,7 +11,9 @@ const Header = () => {
     <header>
       <div id={styles["first-row"]}>
         <div className={styles["h-group"]}>
-          <h1 id="title">Simple Budget App</h1>
+          <h1 id="title" data-testid="title">
+            Simple Budget App
+          </h1>
           <h2>Hello, {userName}!</h2>
         </div>
         <SecondaryNav />
