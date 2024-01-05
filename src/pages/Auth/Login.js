@@ -61,6 +61,7 @@ const Login = () => {
           <div className={styles.row}>
             {/* <input type="hidden" name="_csrf" value={req.csrfToken()} /> */}
             <button
+              id="login-btn"
               className={`${styles.button} ${styles["btn-primary"]}`}
               type="submit"
               value="Login"

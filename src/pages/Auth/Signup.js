@@ -147,5 +147,5 @@ export async function action({ request }) {
     throw json({ message: "Could not authenticate user." }, { status: 500 });
   }
 
-  return redirect("/login");
+  return redirect("/");
 }
