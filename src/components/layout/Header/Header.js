@@ -14,12 +14,14 @@ const Header = () => {
           <h1 id="title" data-testid="title">
             Simple Budget App
           </h1>
-          <h2>Hello, {userName}!</h2>
+          <h2>
+            Hello, <span id="username">{userName}</span>!
+          </h2>
         </div>
         <SecondaryNav />
       </div>
       <div id={styles["second-row"]}>
-        <h3>{titleCtx.pageTitle}</h3>
+        <h3 id="pageTitle">{titleCtx.pageTitle}</h3>
       </div>
     </header>
   );
