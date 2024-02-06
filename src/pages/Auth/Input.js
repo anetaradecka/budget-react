@@ -5,7 +5,13 @@ export default function Input({ label, id, error, ...props }) {
     <div className={styles.row}>
       <label htmlFor={id}>{label}</label>
       <input id={id} {...props} />
-      <div>{error && <p className={styles["error-msg"]}>{error}</p>}</div>
+      <div>
+        {error && (
+          <p className={styles["error-msg"]} data-testid="error-msg">
+            {error}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

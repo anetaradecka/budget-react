@@ -34,7 +34,7 @@ const Login = () => {
         <div className={styles.title}>
           <span>Welcome!</span>
         </div>
-        <Form method="POST" className={styles.form}>
+        <Form method="POST" className={styles.form} data-testid="form">
           <Input
             label="Email-address"
             id="email"
