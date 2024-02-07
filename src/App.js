@@ -1,25 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import Transactions, {
   loader as transactionsLoader,
   action as newTransactionAction,
 } from "./pages/Transactions/Transactions";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
-// import LandingPage from "./pages/Landing";
 import Login, { action as loginAction } from "./pages/Auth/Login";
 import Signup, { action as signupAction } from "./pages/Auth/Signup";
 import { action as logoutAction } from "./pages/Logout";
 import { checkAuthLoader } from "./util/auth";
 
 const router = createBrowserRouter([
-  // LP moved to a separate project
-  // {
-  //   path: "/",
-  //   index: true,
-  //   element: <LandingPage />,
-  //   errorElement: <ErrorPage />,
-  // },
   {
     path: "/",
     element: <Login />,

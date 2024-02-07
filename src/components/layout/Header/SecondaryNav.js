@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-router-dom";
-
 import styles from "./SecondaryNav.module.css";
 
 let useClickOutside = (handler) => {
@@ -53,7 +52,6 @@ const SecondaryNav = () => {
         </li>
         <li className={styles["nav-item"]}>
           <Form className={styles.logout} action="/logout" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
             <button className={`${styles.btn} ${styles.logout}`} type="submit">
               logout
             </button>
