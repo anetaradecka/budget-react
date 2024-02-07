@@ -35,27 +35,23 @@ export function checkAuthLoader() {
   return null;
 }
 
-export function getCSRFToken() {
-  fetch("http://localhost:8080/getCSRFToken")
+export async function getCSRFToken() {
+  const csrf = await fetch("http://localhost:8080/getCSRFToken", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
     .then((res) => {
-      console.log(res.json());
       return res.json();
     })
     .then((data) => {
-      console.log(data);
-      const csrf = data.CSRFToken;
-      console.log(csrf);
-      return csrf;
+      return data.CSRFToken;
     })
     .catch((err) => {
       console.log(err);
     });
 
-  // const responseJSON =  response.json();
-
-  // const csrfToken =  responseJSON.CSRFToken;
-
-  // console.log(`csrfToken: ${csrfToken}`);
-
-  // return csrfToken;
+  return csrf;
 }

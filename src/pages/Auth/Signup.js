@@ -1,6 +1,6 @@
 import { Link, Form, redirect, json, useActionData } from "react-router-dom";
 import { useInput } from "../../hooks/useInput";
-// import { getCSRFToken } from "../../util/auth";
+import { getCSRFToken } from "../../util/auth";
 
 import {
   isValidEmail,
@@ -107,7 +107,6 @@ const Signup = () => {
             }
           /> */}
           <div className={styles.row}>
-            {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
             <button className={styles.button} type="submit" value="Login">
               Create account
             </button>
@@ -115,7 +114,6 @@ const Signup = () => {
           <div className={styles["signup-link"]}>
             Already a member? <Link to="/">Log in</Link>
           </div>
-          {/* <Link to="/">Go back</Link> */}
         </Form>
       </div>
     </div>
@@ -125,36 +123,14 @@ const Signup = () => {
 export default Signup;
 
 export async function action({ request }) {
-  // const csrf = await getCSRFToken();
-  const csrf = await fetch("http://localhost:8080/getCSRFToken", {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      console.log(typeof data);
-      console.log(typeof data.CSRFToken);
-      const csrfToken = data.CSRFToken;
-      return csrfToken;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  console.log(`csrf: ${csrf}`);
-
+  const csrfToken = getCSRFToken();
   const data = await request.formData();
 
   const response = await fetch("http://localhost:8080/auth/signup", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "X-CSRF-Token": csrf,
+      "X-CSRF-Token": csrfToken,
     },
     body: JSON.stringify({
       name: data.get("name"),
