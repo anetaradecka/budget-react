@@ -1,6 +1,7 @@
 import { Link, Form, redirect, json, useActionData } from "react-router-dom";
 import { useInput } from "../../hooks/useInput";
 import { isValidEmail, isNotEmpty } from "../../util/validation";
+import { getCSRFToken } from "../../util/auth";
 import styles from "./Auth.module.css";
 import Input from "./Input";
 
@@ -59,7 +60,6 @@ const Login = () => {
             <a href="/reset-password">Forgot password?</a>
           </div>
           <div className={styles.row}>
-            {/* <input type="hidden" name="_csrf" value={req.csrfToken()} /> */}
             <button
               id="login-btn"
               className={`${styles.button} ${styles["btn-primary"]}`}
@@ -81,22 +81,14 @@ const Login = () => {
 export default Login;
 
 export async function action({ request }) {
+  const csrfToken = getCSRFToken();
   const data = await request.formData();
-
-  // const getCSRFToken = async () => {
-  //   const response = await fetch("http://localhost:8080/getCSRFToken");
-  //   console.log(response);
-  //   return response.data.CSRFToken;
-  // };
-
-  // const csrfToken = getCSRFToken();
-  // console.log(csrfToken);
 
   const response = await fetch("http://localhost:8080/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // "X-CSRF-Token": csrfToken,
+      "X-CSRF-Token": csrfToken,
     },
     body: JSON.stringify({
       email: data.get("email"),
