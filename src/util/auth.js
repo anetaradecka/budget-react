@@ -34,3 +34,28 @@ export function checkAuthLoader() {
 
   return null;
 }
+
+export function getCSRFToken() {
+  fetch("http://localhost:8080/getCSRFToken")
+    .then((res) => {
+      console.log(res.json());
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      const csrf = data.CSRFToken;
+      console.log(csrf);
+      return csrf;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  // const responseJSON =  response.json();
+
+  // const csrfToken =  responseJSON.CSRFToken;
+
+  // console.log(`csrfToken: ${csrfToken}`);
+
+  // return csrfToken;
+}
