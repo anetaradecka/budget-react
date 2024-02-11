@@ -10,7 +10,6 @@ const Button = styled.button`
   background: var(--btn-primary);
   border-color: var(--btn-primary);
   color: #fff;
-  align-self: flex-end;
 
   &:hover {
     background: #fff;
