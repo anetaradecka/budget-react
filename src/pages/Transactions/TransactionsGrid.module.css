@@ -30,7 +30,11 @@
 
 .grid-cell {
   flex: 1;
-  font-size: 0.8rem;
+}
+
+.data-item {
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .grid-row.meta {

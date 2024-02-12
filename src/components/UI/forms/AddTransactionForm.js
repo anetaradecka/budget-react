@@ -24,8 +24,6 @@ const AddTransactionForm = () => {
         break;
       default:
     }
-
-    console.log(transactionType);
   };
 
   const actionData = useActionData();

@@ -70,7 +70,7 @@ export async function action({ request, params }) {
           { status: 500 }
         );
       } else {
-        return redirect("/transactions");
+        return redirect("/app/transactions");
       }
     case "add":
       const submitData = {
