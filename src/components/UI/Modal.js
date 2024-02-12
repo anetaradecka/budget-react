@@ -1,7 +1,8 @@
+import { createPortal } from "react-dom";
 import styles from "./Modal.module.css";
 
 const Modal = (props) => {
-  return (
+  return createPortal(
     <div className={styles.modal}>
       <div className={styles.overlay}></div>
       <div className={styles.content}>
@@ -9,7 +10,8 @@ const Modal = (props) => {
         <h1>New transaction</h1>
         {props.children}
       </div>
-    </div>
+    </div>,
+    document.getElementById("modal")
   );
 };
 
