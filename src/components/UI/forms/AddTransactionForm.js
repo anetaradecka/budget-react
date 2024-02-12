@@ -1,4 +1,5 @@
 import { Form, useActionData } from "react-router-dom";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -63,9 +64,8 @@ const AddTransactionForm = (props) => {
         <div className={styles.buttons}>
           <ButtonPrimary type="submit">Save</ButtonPrimary>
         </div>
-
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-        <input type="hidden" name="type" value="<%= type %>" />
+        {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
+        {/* <input type="hidden" name="type" value="<%= type %>" /> */}
       </Form>
     </Modal>
   );

@@ -67,3 +67,20 @@
   text-align: center;
   padding: 20px;
 }
+
+.add-transaction {
+  display: flex;
+  padding: 10px 0;
+  font-size: 0.8em;
+  color: #898989;
+  width: 100%;
+}
+
+.grid-2-columns {
+  width: 50%;
+}
+
+.grid-2-columns:nth-of-type(2) {
+  display: flex;
+  flex-direction: row-reverse;
+}

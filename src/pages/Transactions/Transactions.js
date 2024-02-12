@@ -1,6 +1,6 @@
 import { useLoaderData, redirect } from "react-router-dom";
 
-import AddTransactionForm from "../../components/UI/forms/AddTransactionForm";
+import AddTransaction from "./AddTransaction";
 import TransactionsGrid from "./TransactionsGrid";
 import { getAuthToken } from "../../util/auth";
 
@@ -13,7 +13,7 @@ const Transactions = () => {
 
   return (
     <>
-      <AddTransactionForm />
+      <AddTransaction />
       <TransactionsGrid transactions={transactions} />
     </>
   );

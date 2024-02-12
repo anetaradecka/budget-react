@@ -6,15 +6,15 @@
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
   z-index: 1;
-  /* display: none; */
+  display: none;
 }
 
 .modal .content {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* transform: translate(-50%, -50%) scale(0); */
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(0);
+  /* transform: translate(-50%, -50%) scale(1); */
   background: #fff;
   width: 450px;
   height: 550px;
