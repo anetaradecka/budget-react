@@ -1,10 +1,26 @@
 import { createPortal } from "react-dom";
+import { useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
 import AddTransactionForm from "./forms/AddTransactionForm";
 
 const Modal = (props) => {
+  const contentRef = useRef(null);
+
   const handleBtnClose = () => {
     props.onModalClose();
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  });
+
+  const handleOutsideClick = (e) => {
+    if (contentRef.current && !contentRef.current.contains(e.target)) {
+      props.onModalClose();
+    }
   };
 
   return createPortal(
@@ -14,7 +30,11 @@ const Modal = (props) => {
       }
     >
       <div className={styles.overlay}></div>
-      <div className={styles.content}>
+      <div
+        className={styles.content}
+        ref={contentRef}
+        onClick={handleOutsideClick}
+      >
         <div className={styles["close-btn"]} onClick={handleBtnClose}>
           &times;
         </div>
