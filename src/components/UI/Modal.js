@@ -38,7 +38,7 @@ const Modal = (props) => {
         <div className={styles["close-btn"]} onClick={handleBtnClose}>
           &times;
         </div>
-        <h1>New transaction</h1>
+        <h2>New transaction</h2>
         <AddTransactionForm />
       </div>
     </div>,

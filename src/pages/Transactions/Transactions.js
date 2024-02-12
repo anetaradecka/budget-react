@@ -75,6 +75,7 @@ export async function action({ request, params }) {
     case "add":
       const submitData = {
         category: requestData.get("category"),
+        type: requestData.get("type"),
         date: requestData.get("date"),
         value: requestData.get("value"),
         description: requestData.get("description"),

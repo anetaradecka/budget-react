@@ -1,11 +1,33 @@
 import { Form, useActionData } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./AddTransactionForm.module.css";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 
-const AddTransactionForm = (props) => {
+const AddTransactionForm = () => {
+  const [transactionType, setTransactionType] = useState("");
+
+  useEffect(() => {
+    document.querySelector('input[name="type"]').value = transactionType;
+  }, [transactionType]);
+
+  const onTransactionIconClick = (event) => {
+    const type = event.target.dataset.value;
+    switch (type) {
+      case "inflow":
+        setTransactionType("inflow");
+        break;
+      case "outflow":
+        setTransactionType("outflow");
+        break;
+      default:
+    }
+
+    console.log(transactionType);
+  };
+
   const actionData = useActionData();
   //TODO: use useActionData to validate input fields
 
@@ -20,12 +42,36 @@ const AddTransactionForm = (props) => {
       )}
       {actionData && actionData.msg && <p>{actionData.msg}</p>}
       <div className={`${styles["form-control-items-group"]}`}>
-        <div className={`${styles["icon-circle"]} ${styles.activ}`}>
-          <FontAwesomeIcon className={styles.icon} icon={faArrowUp} />
+        <div
+          className={
+            transactionType && transactionType === "outflow"
+              ? `${styles["icon-circle"]} ${styles.activ}`
+              : `${styles["icon-circle"]}`
+          }
+          onClick={onTransactionIconClick}
+          data-value="outflow"
+        >
+          <FontAwesomeIcon
+            className={styles.icon}
+            icon={faArrowUp}
+            data-value="outflow"
+          />
         </div>
         Outflow
-        <div className={styles["icon-circle"]}>
-          <FontAwesomeIcon className={styles.icon} icon={faArrowDown} />
+        <div
+          className={
+            transactionType && transactionType === "inflow"
+              ? `${styles["icon-circle"]} ${styles.activ}`
+              : `${styles["icon-circle"]}`
+          }
+          onClick={onTransactionIconClick}
+          data-value="inflow"
+        >
+          <FontAwesomeIcon
+            className={styles.icon}
+            icon={faArrowDown}
+            data-value="inflow"
+          />
         </div>
         Inflow
       </div>
@@ -62,7 +108,7 @@ const AddTransactionForm = (props) => {
         <ButtonPrimary type="submit">Save</ButtonPrimary>
       </div>
       {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
-      {/* <input type="hidden" name="type" value="<%= type %>" /> */}
+      <input type="hidden" name="type" />
     </Form>
   );
 };
