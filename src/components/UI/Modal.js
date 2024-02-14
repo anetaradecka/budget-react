@@ -39,7 +39,7 @@ const Modal = (props) => {
           &times;
         </div>
         <h2>New transaction</h2>
-        <AddTransactionForm />
+        <AddTransactionForm isModalVisible={props.isVisible} />
       </div>
     </div>,
     document.getElementById("modal")

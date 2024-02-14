@@ -48,6 +48,18 @@ export async function action({ request, params }) {
   const requestData = await request.formData();
   const selectedAction = requestData.get("actionType");
 
+  const type = String(requestData.get("type"));
+  const category = String(requestData.get("category"));
+  const value = String(requestData.get("value"));
+  const date = String(requestData.get("date"));
+
+  let errors = "";
+
+  if (!type || !value || !date || category === "Selected") {
+    errors = "Transaction type, category, amount and date must be selected.";
+    return errors;
+  }
+
   let response;
 
   switch (selectedAction) {

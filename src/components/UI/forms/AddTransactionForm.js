@@ -7,7 +7,7 @@ import styles from "./AddTransactionForm.module.css";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 import categories from "../../../mockData/categories";
 
-const AddTransactionForm = () => {
+const AddTransactionForm = (props) => {
   const [transactionType, setTransactionType] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
@@ -55,118 +55,117 @@ const AddTransactionForm = () => {
     setTransactionType("");
   };
 
-  const actionData = useActionData();
   //TODO: use useActionData to validate input fields
+  const errors = useActionData();
 
   return (
-    <Form
-      method="post"
-      className={styles["transaction-form"]}
-      onSubmit={onFormSubmitHandler}
-    >
-      {actionData && actionData.errors && (
-        <ul>
-          {Object.values(actionData.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
+    <>
+      {errors && (
+        <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
+          <p>{errors}</p>
+        </div>
       )}
-      {actionData && actionData.msg && <p>{actionData.msg}</p>}
-      <div className={`${styles["form-control-items-group"]}`}>
-        <div
-          className={
-            transactionType && transactionType === "outflow"
-              ? `${styles["icon-circle"]} ${styles.activ}`
-              : `${styles["icon-circle"]}`
-          }
-          onClick={onTransactionIconClick}
-          data-value="outflow"
-        >
-          <FontAwesomeIcon
-            className={styles.icon}
-            icon={faArrowUp}
-            data-value="outflow"
-          />
-        </div>
-        Outflow
-        <div
-          className={
-            transactionType && transactionType === "inflow"
-              ? `${styles["icon-circle"]} ${styles.activ}`
-              : `${styles["icon-circle"]}`
-          }
-          onClick={onTransactionIconClick}
-          data-value="inflow"
-        >
-          <FontAwesomeIcon
-            className={styles.icon}
-            icon={faArrowDown}
-            data-value="inflow"
-          />
-        </div>
-        Inflow
-      </div>
-      <div className={styles["form-control-group"]}>
-        <div className={`${styles["form-control"]}`}>
-          <label htmlFor="category">Category</label>
-          <select
-            id={styles.category}
-            name="category"
-            onChange={handleCategoryValueChange}
-            value={category}
-          >
-            <option>Select</option>
-            {categories &&
-              categories.map((cat, index) => {
-                return <option key={index}>{cat}</option>;
-              })}
-          </select>
-        </div>
-
+      <Form
+        method="post"
+        className={styles["transaction-form"]}
+        onSubmit={onFormSubmitHandler}
+      >
         <div className={`${styles["form-control-items-group"]}`}>
-          <div className={`${styles["form-control"]}`}>
-            <label htmlFor="value">Amount</label>
-            <input
-              type="number"
-              name="value"
-              id="value"
-              step="0.01"
-              onChange={handleAmountValueChange}
-              value={amount}
+          <div
+            className={
+              transactionType && transactionType === "outflow"
+                ? `${styles["icon-circle"]} ${styles.activ}`
+                : `${styles["icon-circle"]}`
+            }
+            onClick={onTransactionIconClick}
+            data-value="outflow"
+          >
+            <FontAwesomeIcon
+              className={styles.icon}
+              icon={faArrowUp}
+              data-value="outflow"
             />
           </div>
-
-          <div className={`${styles["form-control"]}`}>
-            <label htmlFor="date">Date</label>
-            <input
-              type="date"
-              name="date"
-              id="date"
-              onChange={handleDateValueChange}
-              value={date}
+          Outflow
+          <div
+            className={
+              transactionType && transactionType === "inflow"
+                ? `${styles["icon-circle"]} ${styles.activ}`
+                : `${styles["icon-circle"]}`
+            }
+            onClick={onTransactionIconClick}
+            data-value="inflow"
+          >
+            <FontAwesomeIcon
+              className={styles.icon}
+              icon={faArrowDown}
+              data-value="inflow"
             />
+          </div>
+          Inflow
+        </div>
+        <div className={styles["form-control-group"]}>
+          <div className={`${styles["form-control"]}`}>
+            <label htmlFor="category">Category</label>
+            <select
+              id={styles.category}
+              name="category"
+              onChange={handleCategoryValueChange}
+              value={category}
+            >
+              <option>Select</option>
+              {categories &&
+                categories.map((cat, index) => {
+                  return <option key={index}>{cat}</option>;
+                })}
+            </select>
+          </div>
+
+          <div className={`${styles["form-control-items-group"]}`}>
+            <div className={`${styles["form-control"]}`}>
+              <label htmlFor="value">Amount</label>
+              <input
+                type="number"
+                name="value"
+                id="value"
+                step="0.01"
+                onChange={handleAmountValueChange}
+                value={amount}
+              />
+            </div>
+
+            <div className={`${styles["form-control"]}`}>
+              <label htmlFor="date">Date</label>
+              <input
+                type="date"
+                name="date"
+                id="date"
+                onChange={handleDateValueChange}
+                value={date}
+              />
+            </div>
+          </div>
+
+          <div className={styles["form-control"]}>
+            <label htmlFor="description">Description (optional)</label>
+            <textarea
+              name="description"
+              id="description"
+              rows="5"
+              onChange={handleDescriptionValueChange}
+              value={description}
+            ></textarea>
+            <input type="hidden" name="actionType" value="add"></input>
           </div>
         </div>
 
-        <div className={styles["form-control"]}>
-          <label htmlFor="description">Description (optional)</label>
-          <textarea
-            name="description"
-            id="description"
-            rows="5"
-            onChange={handleDescriptionValueChange}
-            value={description}
-          ></textarea>
-          <input type="hidden" name="actionType" value="add"></input>
+        <div className={styles.buttons}>
+          <ButtonPrimary type="submit">Save</ButtonPrimary>
         </div>
-      </div>
-
-      <div className={styles.buttons}>
-        <ButtonPrimary type="submit">Save</ButtonPrimary>
-      </div>
-      {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
-      <input type="hidden" name="type" />
-    </Form>
+        {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
+        <input type="hidden" name="type" />
+      </Form>
+    </>
   );
 };
 
