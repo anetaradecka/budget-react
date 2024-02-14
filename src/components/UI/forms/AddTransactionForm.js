@@ -5,9 +5,14 @@ import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./AddTransactionForm.module.css";
 import ButtonPrimary from "../buttons/ButtonPrimary";
+import categories from "../../../mockData/categories";
 
 const AddTransactionForm = () => {
   const [transactionType, setTransactionType] = useState("");
+  const [category, setCategory] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     document.querySelector('input[name="type"]').value = transactionType;
@@ -26,11 +31,39 @@ const AddTransactionForm = () => {
     }
   };
 
+  const handleAmountValueChange = (event) => {
+    setAmount(event.target.value);
+  };
+
+  const handleDateValueChange = (event) => {
+    setDate(event.target.value);
+  };
+
+  const handleDescriptionValueChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleCategoryValueChange = (event) => {
+    setCategory(event.target.value);
+  };
+
+  const onFormSubmitHandler = () => {
+    setCategory("");
+    setAmount("");
+    setDate("");
+    setDescription("");
+    setTransactionType("");
+  };
+
   const actionData = useActionData();
   //TODO: use useActionData to validate input fields
 
   return (
-    <Form method="post" className={styles["transaction-form"]}>
+    <Form
+      method="post"
+      className={styles["transaction-form"]}
+      onSubmit={onFormSubmitHandler}
+    >
       {actionData && actionData.errors && (
         <ul>
           {Object.values(actionData.errors).map((err) => (
@@ -76,28 +109,54 @@ const AddTransactionForm = () => {
       <div className={styles["form-control-group"]}>
         <div className={`${styles["form-control"]}`}>
           <label htmlFor="category">Category</label>
-          <select id={styles.category} name="category">
-            <option value="food">food</option>
-            <option value="bills">bills</option>
-            <option value="education">education</option>
+          <select
+            id={styles.category}
+            name="category"
+            onChange={handleCategoryValueChange}
+            value={category}
+          >
+            <option>Select</option>
+            {categories &&
+              categories.map((cat, index) => {
+                return <option key={index}>{cat}</option>;
+              })}
           </select>
         </div>
 
         <div className={`${styles["form-control-items-group"]}`}>
           <div className={`${styles["form-control"]}`}>
             <label htmlFor="value">Amount</label>
-            <input type="number" name="value" id="value" step="0.01" />
+            <input
+              type="number"
+              name="value"
+              id="value"
+              step="0.01"
+              onChange={handleAmountValueChange}
+              value={amount}
+            />
           </div>
 
           <div className={`${styles["form-control"]}`}>
             <label htmlFor="date">Date</label>
-            <input type="date" name="date" id="date" />
+            <input
+              type="date"
+              name="date"
+              id="date"
+              onChange={handleDateValueChange}
+              value={date}
+            />
           </div>
         </div>
 
         <div className={styles["form-control"]}>
           <label htmlFor="description">Description (optional)</label>
-          <textarea name="description" id="description" rows="5"></textarea>
+          <textarea
+            name="description"
+            id="description"
+            rows="5"
+            onChange={handleDescriptionValueChange}
+            value={description}
+          ></textarea>
           <input type="hidden" name="actionType" value="add"></input>
         </div>
       </div>
