@@ -18,6 +18,12 @@ const AddTransactionForm = (props) => {
     document.querySelector('input[name="type"]').value = transactionType;
   }, [transactionType]);
 
+  useEffect(() => {
+    if (!props.modalVisible) {
+      onFormSubmitHandler();
+    }
+  }, [props.modalVisible]);
+
   const onTransactionIconClick = (event) => {
     const type = event.target.dataset.value;
     switch (type) {
@@ -55,7 +61,6 @@ const AddTransactionForm = (props) => {
     setTransactionType("");
   };
 
-  //TODO: use useActionData to validate input fields
   const errors = useActionData();
 
   return (

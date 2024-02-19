@@ -18,7 +18,7 @@ const AddTransaction = () => {
   return (
     <>
       <Container>
-        <Modal onModalClose={handleModalClick} isVisible={modalVisible} />
+        <Modal onModalClose={handleModalClick} modalVisible={modalVisible} />
         <section className={styles["add-transaction"]}>
           <div className={styles["grid-2-columns"]}>
             This is your transactions section, where you can add new inflows and

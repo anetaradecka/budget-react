@@ -26,7 +26,7 @@ const Modal = (props) => {
   return createPortal(
     <div
       className={
-        props.isVisible ? `${styles.modal} ${styles.active}` : styles.modal
+        props.modalVisible ? `${styles.modal} ${styles.active}` : styles.modal
       }
     >
       <div className={styles.overlay}></div>
@@ -39,7 +39,7 @@ const Modal = (props) => {
           &times;
         </div>
         <h2>New transaction</h2>
-        <AddTransactionForm isModalVisible={props.isVisible} />
+        <AddTransactionForm modalVisible={props.modalVisible} />
       </div>
     </div>,
     document.getElementById("modal")
