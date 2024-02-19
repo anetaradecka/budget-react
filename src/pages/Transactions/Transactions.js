@@ -3,6 +3,7 @@ import { useLoaderData, redirect } from "react-router-dom";
 import AddTransaction from "./AddTransaction";
 import TransactionsGrid from "./TransactionsGrid";
 import { getAuthToken } from "../../util/auth";
+import { getCSRFToken } from "../../util/auth";
 
 const Transactions = () => {
   let transactions = useLoaderData();
@@ -24,10 +25,12 @@ export default Transactions;
 // Fetching data on component load
 export async function loader() {
   const token = getAuthToken();
+  const csrfToken = getCSRFToken();
 
   const response = await fetch("http://localhost:8080/transactions", {
     headers: {
       Authorization: "Bearer " + token,
+      "X-CSRF-Token": csrfToken,
     },
   });
 
@@ -45,6 +48,7 @@ export async function loader() {
 // Actions taken basen on request POST/DELETE method
 export async function action({ request, params }) {
   const token = getAuthToken();
+  const csrfToken = getCSRFToken();
   const requestData = await request.formData();
   const selectedAction = requestData.get("actionType");
 
@@ -72,6 +76,7 @@ export async function action({ request, params }) {
           method: request.method,
           headers: {
             Authorization: "Bearer " + token,
+            "X-CSRF-Token": csrfToken,
           },
         }
       );
@@ -100,6 +105,7 @@ export async function action({ request, params }) {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
+            "X-CSRF-Token": csrfToken,
           },
           body: JSON.stringify({ submitData }),
         }
