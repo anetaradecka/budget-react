@@ -4,7 +4,7 @@ import ButtonSecondary from "../../components/UI/buttons/ButtonSecondary";
 import { useState } from "react";
 import Modal from "../../components/UI/Modal";
 
-const AddTransaction = () => {
+const AddTransaction = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleButtonClick = () => {
@@ -15,10 +15,18 @@ const AddTransaction = () => {
     setModalVisible(false);
   };
 
+  const handleTransactionSubmit = (data) => {
+    props.onTransactionSubmit(data);
+  };
+
   return (
     <>
       <Container>
-        <Modal onModalClose={handleModalClick} modalVisible={modalVisible} />
+        <Modal
+          onModalClose={handleModalClick}
+          modalVisible={modalVisible}
+          onTransactionSubmit={handleTransactionSubmit}
+        />
         <section className={styles["add-transaction"]}>
           <div className={styles["grid-2-columns"]}>
             This is your transactions section, where you can add new inflows and

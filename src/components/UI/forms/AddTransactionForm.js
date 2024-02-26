@@ -1,4 +1,5 @@
-import { Form, useActionData } from "react-router-dom";
+// import { Form, useActionData } from "react-router-dom";
+import { Form } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
@@ -18,11 +19,11 @@ const AddTransactionForm = (props) => {
     document.querySelector('input[name="type"]').value = transactionType;
   }, [transactionType]);
 
-  useEffect(() => {
-    if (!props.modalVisible) {
-      onFormSubmitHandler();
-    }
-  }, [props.modalVisible]);
+  // useEffect(() => {
+  //   if (!props.modalVisible) {
+  //     onFormSubmitHandler();
+  //   }
+  // }, [props.modalVisible]);
 
   const onTransactionIconClick = (event) => {
     const type = event.target.dataset.value;
@@ -54,22 +55,26 @@ const AddTransactionForm = (props) => {
   };
 
   const onFormSubmitHandler = () => {
-    setCategory("");
-    setAmount("");
-    setDate("");
-    setDescription("");
-    setTransactionType("");
+    const submitData = {
+      category: category,
+      date: date,
+      value: amount,
+      description: description,
+      type: transactionType,
+    };
+
+    props.onTransactionSubmit(submitData);
   };
 
-  const errors = useActionData();
+  // const errors = useActionData();
 
   return (
     <>
-      {errors && (
+      {/* {errors && (
         <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
           <p>{errors}</p>
         </div>
-      )}
+      )} */}
       <Form
         method="post"
         className={styles["transaction-form"]}

@@ -23,6 +23,10 @@ const Modal = (props) => {
     }
   };
 
+  const handleTransactionSubmit = (data) => {
+    props.onTransactionSubmit(data);
+  };
+
   return createPortal(
     <div
       className={
@@ -39,7 +43,10 @@ const Modal = (props) => {
           &times;
         </div>
         <h2>New transaction</h2>
-        <AddTransactionForm modalVisible={props.modalVisible} />
+        <AddTransactionForm
+          modalVisible={props.modalVisible}
+          onTransactionSubmit={handleTransactionSubmit}
+        />
       </div>
     </div>,
     document.getElementById("modal")
