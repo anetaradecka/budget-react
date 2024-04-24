@@ -3,7 +3,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //   // loader as transactionsLoader,
 //   action as newTransactionAction,
 // } from "./pages/Transactions/Transactions";
-import Transactions from "./pages/Transactions/Transactions"; // loader as transactionsLoader,
+import Transactions, {
+  addTransactionAction,
+  addTransactionsLoader,
+} from "./pages/Transactions/Transactions"; // loader as transactionsLoader,
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import Login, { action as loginAction } from "./pages/Auth/Login";
@@ -34,14 +37,14 @@ const router = createBrowserRouter([
   {
     path: "/app",
     element: <RootLayout />,
-    errorElement: <ErrorPage />,
+    // errorElement: <ErrorPage />,
     children: [
       {
         index: true,
         path: "transactions",
         element: <Transactions />,
-        // loader: transactionsLoader,
-        // action: newTransactionAction,
+        loader: addTransactionsLoader,
+        action: addTransactionAction,
       },
     ],
     loader: checkAuthLoader,

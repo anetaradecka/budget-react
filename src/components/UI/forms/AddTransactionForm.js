@@ -79,6 +79,7 @@ const AddTransactionForm = (props) => {
         method="post"
         className={styles["transaction-form"]}
         onSubmit={onFormSubmitHandler}
+        action="/app/transactions"
       >
         <div className={`${styles["form-control-items-group"]}`}>
           <div
