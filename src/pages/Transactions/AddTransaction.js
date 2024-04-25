@@ -17,6 +17,7 @@ const AddTransaction = (props) => {
 
   const handleTransactionSubmit = (data) => {
     props.onTransactionSubmit(data);
+    setModalVisible(false);
   };
 
   return (

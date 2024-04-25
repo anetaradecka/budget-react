@@ -19,12 +19,6 @@ const AddTransactionForm = (props) => {
     document.querySelector('input[name="type"]').value = transactionType;
   }, [transactionType]);
 
-  // useEffect(() => {
-  //   if (!props.modalVisible) {
-  //     onFormSubmitHandler();
-  //   }
-  // }, [props.modalVisible]);
-
   const onTransactionIconClick = (event) => {
     const type = event.target.dataset.value;
     switch (type) {
@@ -173,7 +167,6 @@ const AddTransactionForm = (props) => {
         <div className={styles.buttons}>
           <ButtonPrimary type="submit">Save</ButtonPrimary>
         </div>
-        {/* <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> */}
         <input type="hidden" name="type" />
       </Form>
     </>

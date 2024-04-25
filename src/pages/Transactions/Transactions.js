@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { redirect, useLoaderData } from "react-router-dom";
+import { redirect } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { getAuthToken } from "../../util/auth";
 import { getCSRFToken } from "../../util/auth";
 
@@ -14,15 +15,16 @@ import Container from "../../components/layout/Container";
 import AddTransaction from "./AddTransaction";
 
 const Transactions = () => {
-  const data = useLoaderData();
+  // const navigate = useNavigate();
+  // const data = useLoaderData();
   const scrollRef = useRef(null);
-  const [page, setPage] = useState(1);
-  const [transactions, setTransactions] = useState(data.transactions);
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     const token = getAuthToken();
     const csrfToken = getCSRFToken();
-    fetch(`http://localhost:8080/transactions?page=${page}`, {
+
+    fetch(`http://localhost:8080/transactions?page=1`, {
       headers: {
         Authorization: "Bearer " + token,
         "X-CSRF-Token": csrfToken,
@@ -41,25 +43,6 @@ const Transactions = () => {
       .then((data) => {
         setTransactions((prev) => [...prev, ...data.transactions]);
       });
-  }, [page]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
-      ) {
-        setPage((prev) => prev + 1);
-      }
-    };
-
-    const element = scrollRef.current;
-
-    element.addEventListener("scroll", handleScroll);
-
-    return () => {
-      element.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
   const handleItemDelete = async (itemId) => {
@@ -92,60 +75,7 @@ const Transactions = () => {
   };
 
   const handleTransactionSubmit = async () => {
-    // const submitData = {
-    //   category: data.category,
-    //   date: data.date,
-    //   value: data.value,
-    //   description: data.description,
-    //   type: data.type,
-    // };
-    // const token = getAuthToken();
-    // const csrfToken = getCSRFToken();
-    // let response = await fetch(
-    //   "http://localhost:8080/transactions/add-transaction",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: "Bearer " + token,
-    //       "X-CSRF-Token": csrfToken,
-    //     },
-    //     body: JSON.stringify({ submitData }),
-    //   }
-    // );
-    // if (response === 422) {
-    //   return response;
-    // }
-    // if (!response.ok) {
-    //   throw new Response(
-    //     JSON.stringify({ message: "Could not add transaction" }),
-    //     { status: 500 }
-    //   );
-    // }
-    // navigate("/app/transactions");
-    // await fetch(`http://localhost:8080/transactions?page=1`, {
-    //   headers: {
-    //     Authorization: "Bearer " + token,
-    //     "X-CSRF-Token": csrfToken,
-    //   },
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Response(
-    //         JSON.stringify({ message: "Could not fetch transactions" }),
-    //         { status: 500 }
-    //       );
-    //     } else {
-    //       return response.json();
-    //     }
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   });
-    // forceUpdate();
-    // setTransactions(newTransactions);
-    // console.log(newTransactions);
-    // console.log(transactions);
+    // TODO
   };
 
   return (
@@ -194,28 +124,29 @@ const Transactions = () => {
   );
 };
 
-export const addTransactionsLoader = async () => {
-  const token = getAuthToken();
-  const csrfToken = getCSRFToken();
+// TODO: use loader or useEffect to initially load data?
+// export const addTransactionsLoader = async () => {
+//   const token = getAuthToken();
+//   const csrfToken = getCSRFToken();
 
-  const data = await fetch(`http://localhost:8080/transactions?page=1`, {
-    headers: {
-      Authorization: "Bearer " + token,
-      "X-CSRF-Token": csrfToken,
-    },
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Response(
-        JSON.stringify({ message: "Could not fetch transactions" }),
-        { status: 500 }
-      );
-    } else {
-      return response.json();
-    }
-  });
+//   const data = await fetch(`http://localhost:8080/transactions?page=1`, {
+//     headers: {
+//       Authorization: "Bearer " + token,
+//       "X-CSRF-Token": csrfToken,
+//     },
+//   }).then((response) => {
+//     if (!response.ok) {
+//       throw new Response(
+//         JSON.stringify({ message: "Could not fetch transactions" }),
+//         { status: 500 }
+//       );
+//     } else {
+//       return response.json();
+//     }
+//   });
 
-  return data;
-};
+//   return data;
+// };
 
 export const addTransactionAction = async ({ request }) => {
   const data = await request.formData();
@@ -244,10 +175,6 @@ export const addTransactionAction = async ({ request }) => {
     }
   );
 
-  if (response === 422) {
-    return response;
-  }
-
   if (!response.ok) {
     throw new Response(
       JSON.stringify({ message: "Could not add transaction" }),
@@ -255,7 +182,12 @@ export const addTransactionAction = async ({ request }) => {
     );
   }
 
-  return redirect("/app/transactions");
+  if (response === 422) {
+    return response;
+  } else {
+    console.log("Transaction added");
+    return redirect("/app/transactions");
+  }
 };
 
 export default Transactions;
