@@ -58,6 +58,12 @@ const AddTransactionForm = (props) => {
     };
 
     props.onTransactionSubmit(submitData);
+
+    setTransactionType("");
+    setAmount("");
+    setCategory("");
+    setDate("");
+    setDescription("");
   };
 
   // const errors = useActionData();
