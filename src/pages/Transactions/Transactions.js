@@ -21,28 +21,33 @@ const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    const token = getAuthToken();
-    const csrfToken = getCSRFToken();
+    async function fetchTransactions() {
+      const token = getAuthToken();
+      const csrfToken = getCSRFToken();
 
-    fetch(`http://localhost:8080/transactions?page=1`, {
-      headers: {
-        Authorization: "Bearer " + token,
-        "X-CSRF-Token": csrfToken,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Response(
-            JSON.stringify({ message: "Could not fetch transactions" }),
-            { status: 500 }
-          );
-        } else {
-          return response.json();
+      const response = await fetch(
+        `http://localhost:8080/transactions?page=1`,
+        {
+          headers: {
+            // method: "GET", // Why blocked by CORS?
+            Authorization: "Bearer " + token,
+            "X-CSRF-Token": csrfToken,
+          },
         }
-      })
-      .then((data) => {
-        setTransactions((prev) => [...prev, ...data.transactions]);
-      });
+      );
+
+      if (!response.ok) {
+        throw new Response(
+          JSON.stringify({ message: "Could not fetch transactions" }),
+          { status: 500 }
+        );
+      }
+
+      const data = await response.json();
+      setTransactions(data.transactions);
+    }
+
+    fetchTransactions();
   }, []);
 
   const handleItemDelete = async (itemId) => {
