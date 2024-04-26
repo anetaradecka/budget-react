@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { redirect } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import { getAuthToken } from "../../util/auth";
 import { getCSRFToken } from "../../util/auth";
 
@@ -15,8 +14,6 @@ import Container from "../../components/layout/Container";
 import AddTransaction from "./AddTransaction";
 
 const Transactions = () => {
-  // const navigate = useNavigate();
-  // const data = useLoaderData();
   const scrollRef = useRef(null);
   const [transactions, setTransactions] = useState([]);
 
@@ -79,8 +76,66 @@ const Transactions = () => {
     }
   };
 
-  const handleTransactionSubmit = async () => {
-    // TODO
+  const handleTransactionSubmit = async (data) => {
+    const submitData = {
+      category: data.category,
+      date: data.date,
+      value: data.value,
+      description: data.description,
+      type: data.type,
+    };
+
+    const token = getAuthToken();
+    const csrfToken = getCSRFToken();
+
+    const response = await fetch(
+      "http://localhost:8080/transactions/add-transaction",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+          "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({ submitData }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Response(
+        JSON.stringify({ message: "Could not add transaction" }),
+        { status: 500 }
+      );
+    }
+
+    async function fetchTransactions() {
+      const token = getAuthToken();
+      const csrfToken = getCSRFToken();
+
+      const response = await fetch(
+        `http://localhost:8080/transactions?page=1`,
+        {
+          headers: {
+            // method: "GET", // Why blocked by CORS?
+            Authorization: "Bearer " + token,
+            "X-CSRF-Token": csrfToken,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Response(
+          JSON.stringify({ message: "Could not fetch transactions" }),
+          { status: 500 }
+        );
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setTransactions(data.transactions);
+    }
+
+    fetchTransactions();
   };
 
   return (
@@ -129,70 +184,8 @@ const Transactions = () => {
   );
 };
 
-// TODO: use loader or useEffect to initially load data?
-// export const addTransactionsLoader = async () => {
-//   const token = getAuthToken();
-//   const csrfToken = getCSRFToken();
-
-//   const data = await fetch(`http://localhost:8080/transactions?page=1`, {
-//     headers: {
-//       Authorization: "Bearer " + token,
-//       "X-CSRF-Token": csrfToken,
-//     },
-//   }).then((response) => {
-//     if (!response.ok) {
-//       throw new Response(
-//         JSON.stringify({ message: "Could not fetch transactions" }),
-//         { status: 500 }
-//       );
-//     } else {
-//       return response.json();
-//     }
-//   });
-
-//   return data;
-// };
-
 export const addTransactionAction = async ({ request }) => {
-  const data = await request.formData();
-
-  const submitData = {
-    category: data.get("category"),
-    date: data.get("date"),
-    value: data.get("value"),
-    description: data.get("description"),
-    type: data.get("type"),
-  };
-
-  const token = getAuthToken();
-  const csrfToken = getCSRFToken();
-
-  const response = await fetch(
-    "http://localhost:8080/transactions/add-transaction",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-        "X-CSRF-Token": csrfToken,
-      },
-      body: JSON.stringify({ submitData }),
-    }
-  );
-
-  if (!response.ok) {
-    throw new Response(
-      JSON.stringify({ message: "Could not add transaction" }),
-      { status: 500 }
-    );
-  }
-
-  if (response === 422) {
-    return response;
-  } else {
-    console.log("Transaction added");
-    return redirect("/app/transactions");
-  }
+  return redirect("/app/transactions");
 };
 
 export default Transactions;

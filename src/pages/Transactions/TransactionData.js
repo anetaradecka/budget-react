@@ -2,6 +2,7 @@ import styles from "./TransactionsGrid.module.css";
 import { currencyFormatter } from "../../util/formatting";
 
 const TransactionData = (props) => {
+  // TODO: move to utils
   const convertToLocaleDate = (data) => {
     let date = new Date(data);
     const year = date.getFullYear();
