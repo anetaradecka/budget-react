@@ -1,4 +1,5 @@
 import styles from "./TransactionsGrid.module.css";
+import { currencyFormatter } from "../../util/formatting";
 
 const TransactionData = (props) => {
   const convertToLocaleDate = (data) => {
@@ -29,12 +30,12 @@ const TransactionData = (props) => {
       </div>
       <div className={`${styles["grid-cell"]} ${styles["data-item"]}`}>
         {props.transaction.type === "inflow"
-          ? `+ ${props.transaction.value} PLN`
+          ? `+ ${currencyFormatter.format(props.transaction.value)} `
           : ""}
       </div>
       <div className={`${styles["grid-cell"]} ${styles["data-item"]}`}>
         {props.transaction.type === "outflow"
-          ? `- ${props.transaction.value} PLN`
+          ? `- ${currencyFormatter.format(props.transaction.value)} `
           : ""}
       </div>
     </>
