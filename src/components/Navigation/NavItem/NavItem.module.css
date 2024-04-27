@@ -1,0 +1,20 @@
+/* TODO: Dlaczego się nie importują? */
+#primary-nav ul .nav-item {
+  position: relative;
+  list-style: none;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+}
+
+#primary-nav ul .nav-item span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5px;
+}
+
+#primary-nav ul .nav-item a span.active {
+  background: var(--active-link-color);
+}

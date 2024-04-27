@@ -1,7 +1,7 @@
 import { Link, Form, redirect, json, useActionData } from "react-router-dom";
 import { useInput } from "../../hooks/useInput";
-import { isValidEmail, isNotEmpty } from "../../util/validation";
-import { getCSRFToken } from "../../util/auth";
+import { isValidEmail, isNotEmpty } from "../../utils/validation";
+import { getCSRFToken } from "../../utils/auth";
 import styles from "./Auth.module.css";
 import Input from "./Input";
 

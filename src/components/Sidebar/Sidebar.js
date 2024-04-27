@@ -1,7 +1,7 @@
 import styles from "./Sidebar.module.css";
 
-import UserProfile from "./UserProfile";
-import PrimaryNav from "./PrimaryNav";
+import UserProfile from "../User/UserProfile";
+import PrimaryNav from "../Navigation/PrimaryNavigation/PrimaryNav";
 
 const Sidebar = () => {
   return (

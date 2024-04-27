@@ -1,8 +1,8 @@
-import Container from "../../components/layout/Container";
+import Container from "../../components/Container/Container";
 import styles from "./TransactionsGrid.module.css";
-import ButtonSecondary from "../../components/UI/buttons/ButtonSecondary";
+import ButtonSecondary from "../../components/Buttons/ButtonSecondary";
 import { useState } from "react";
-import Modal from "../../components/UI/Modal";
+import Modal from "../../components/Modal/Modal";
 
 const AddTransaction = (props) => {
   const [modalVisible, setModalVisible] = useState(false);

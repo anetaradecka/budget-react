@@ -1,4 +1,4 @@
-import NavItem from "./NavItem";
+import NavItem from "../NavItem/NavItem";
 import styles from "./PrimaryNav.module.css";
 
 const PrimaryNav = () => {

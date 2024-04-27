@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
-import SecondaryNav from "./SecondaryNav";
+import SecondaryNav from "../Navigation/SecondaryNavigation/SecondaryNav";
 import { useContext } from "react";
-import { TitleContext } from "../../../contex/title-context";
+import { TitleContext } from "../../store/title-context";
 
 const Header = () => {
   const titleCtx = useContext(TitleContext);

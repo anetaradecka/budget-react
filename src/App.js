@@ -7,7 +7,7 @@ import ErrorPage from "./pages/Error";
 import Login, { action as loginAction } from "./pages/Auth/Login";
 import Signup, { action as signupAction } from "./pages/Auth/Signup";
 import { action as logoutAction } from "./pages/Logout";
-import { checkAuthLoader } from "./util/auth";
+import { checkAuthLoader } from "./utils/auth";
 
 const router = createBrowserRouter([
   {

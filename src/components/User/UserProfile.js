@@ -1,6 +1,6 @@
 import styles from "./UserProfile.module.css";
 
-const UserProfile = (props) => {
+const UserProfile = () => {
   return (
     <div className={styles["user-profile"]}>
       <div className={styles["user-avatar"]}>

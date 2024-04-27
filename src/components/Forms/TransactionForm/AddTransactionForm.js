@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./AddTransactionForm.module.css";
-import ButtonPrimary from "../buttons/ButtonPrimary";
+import ButtonPrimary from "../../Buttons/ButtonPrimary";
 import categories from "../../../mockData/categories";
 
 const AddTransactionForm = (props) => {

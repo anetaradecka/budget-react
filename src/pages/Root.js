@@ -5,12 +5,12 @@ import {
   useLocation,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "./../components/layout/Header/Header";
-import Sidebar from "./../components/layout/Sidebar/Sidebar";
-import Main from "./../components/layout/Main/Main";
+import Header from "./../components/Header/Header";
+import Sidebar from "../components/Sidebar/Sidebar";
+import Main from "../components/Main/Main";
 import Dashboard from "./Dashboard/Dashboard";
-import { getTokenDuration } from "../util/auth";
-import { TitleContext } from "../contex/title-context";
+import { getTokenDuration } from "../utils/auth";
+import { TitleContext } from "../store/title-context";
 
 function RootLayout() {
   const location = useLocation();

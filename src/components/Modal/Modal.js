@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import { useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
-import AddTransactionForm from "./forms/AddTransactionForm";
+import AddTransactionForm from "../Forms/TransactionForm/AddTransactionForm";
 
 const Modal = (props) => {
   const contentRef = useRef(null);

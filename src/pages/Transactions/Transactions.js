@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { redirect } from "react-router-dom";
-import { getAuthToken } from "../../util/auth";
-import { getCSRFToken } from "../../util/auth";
+import { getAuthToken } from "../../utils/auth";
+import { getCSRFToken } from "../../utils/auth";
 
 import styles from "./TransactionsGrid.module.css";
 
@@ -10,7 +10,7 @@ import Img from "./Img";
 import Edit from "./Edit";
 import Delete from "./Delete";
 import TransactionData from "./TransactionData";
-import Container from "../../components/layout/Container";
+import Container from "../../components/Container/Container";
 import AddTransaction from "./AddTransaction";
 
 const Transactions = () => {

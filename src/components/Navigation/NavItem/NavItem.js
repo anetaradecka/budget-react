@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import styles from "./PrimaryNav.module.css";
+import styles from "../PrimaryNavigation/PrimaryNav.module.css";
 
 const NavItem = (props) => {
   return (

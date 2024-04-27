@@ -1,5 +1,5 @@
 import styles from "./TransactionsGrid.module.css";
-import { currencyFormatter } from "../../util/formatting";
+import { currencyFormatter } from "../../utils/formatting";
 
 const TransactionData = (props) => {
   // TODO: move to utils
