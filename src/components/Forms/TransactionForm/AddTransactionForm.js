@@ -6,7 +6,7 @@ import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./AddTransactionForm.module.css";
 import ButtonPrimary from "../../Buttons/ButtonPrimary";
-import categories from "../../../mockData/categories";
+import categories from "../../../constants/categories";
 
 const AddTransactionForm = (props) => {
   const [transactionType, setTransactionType] = useState("");

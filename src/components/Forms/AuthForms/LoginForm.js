@@ -53,7 +53,6 @@ const LoginForm = () => {
         Forgot password?
       </Link>
       <Button
-        id="login-btn"
         className={`${btnStyles.button} ${btnStyles["btn-primary"]}`}
         type="submit"
       >
