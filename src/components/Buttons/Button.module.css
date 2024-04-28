@@ -1,0 +1,20 @@
+.button {
+  color: #fff;
+  min-width: 177px;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.button.btn-primary {
+  background: var(--btn-primary);
+  border: 1px solid var(--btn-primary);
+}
+
+.button.btn-primary:hover {
+  background: #fff;
+  color: var(--btn-primary);
+}

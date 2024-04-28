@@ -7,7 +7,7 @@ import {
   isNotEmpty,
   isValidPassword,
   // isEqualToOtherValue,
-} from "../../util/validation";
+} from "../../utils/validation";
 import styles from "./Auth.module.css";
 import Input from "./Input";
 

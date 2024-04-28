@@ -1,0 +1,56 @@
+form {
+  padding: 25px 0;
+  background-color: var(--bg-container);
+}
+
+form .row {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+form .row input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 7px 0 7px 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+form .row input.invalid {
+  border: 1px solid red;
+}
+
+form .row label {
+  color: #777;
+  font-size: 16px;
+}
+
+form a {
+  float: right;
+}
+
+form button {
+  margin-top: 50px;
+}
+.error-msg {
+  height: auto;
+  top: -30px;
+  margin-bottom: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: rgb(249, 92, 92);
+  background-color: rgb(255, 232, 232);
+  font-size: 12px;
+  color: red;
+  padding: 10px;
+}
+
+.isError {
+  border: red;
+  background-color: rgb(246, 160, 160) (153, 134, 134);
+}

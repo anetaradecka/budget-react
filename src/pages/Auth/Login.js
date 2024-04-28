@@ -1,79 +1,26 @@
-import { Link, Form, redirect, json, useActionData } from "react-router-dom";
-import { useInput } from "../../hooks/useInput";
-import { isValidEmail, isNotEmpty } from "../../utils/validation";
-import { getCSRFToken } from "../../utils/auth";
+// external libraries
+import { redirect, json, useActionData } from "react-router-dom";
+// styles
 import styles from "./Auth.module.css";
-import Input from "./Input";
+// components
+import LoginForm from "../../components/Forms/AuthForms/LoginForm";
+import Footer from "../../components/Forms/Footer/Footer";
+// utils
+import { getCSRFToken } from "../../utils/auth";
 
 const Login = () => {
   const errors = useActionData();
-  // custom hook email
-  const {
-    value: emailValue,
-    handleInputValidation: handleEmailChange,
-    handleInputBlur: handleEmailBlur,
-    hasError: emailHasError,
-  } = useInput("", isValidEmail);
-  // custom hook password
-  const {
-    value: passwordValue,
-    handleInputValidation: handlePasswordChange,
-    handleInputBlur: handlePasswordBlur,
-    hasError: passwordHasError,
-  } = useInput("", isNotEmpty);
 
   return (
     <div className={styles["form-container"]}>
-      {/* displays BE errors */}
       {errors && errors.message && (
         <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
           <p>{errors.message}</p>
         </div>
       )}
-
-      <div className={styles.wrapper}>
-        <div className={styles.title}>
-          <span>Welcome!</span>
-        </div>
-        <Form method="POST" className={styles.form}>
-          <Input
-            label="Email address"
-            id="email"
-            type="email"
-            name="email"
-            onChange={handleEmailChange}
-            value={emailValue}
-            onBlur={handleEmailBlur}
-            error={emailHasError && "This is not a valid email address."}
-          />
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            name="password"
-            onChange={handlePasswordChange}
-            value={passwordValue}
-            onBlur={handlePasswordBlur}
-            error={passwordHasError && "Password cannot be empty."}
-          />
-          <div className={styles.pass}>
-            <a href="/reset-password">Forgot password?</a>
-          </div>
-          <div className={styles.row}>
-            <button
-              id="login-btn"
-              className={`${styles.button} ${styles["btn-primary"]}`}
-              type="submit"
-              value="Login"
-            >
-              Log in
-            </button>
-          </div>
-          <div className={styles["signup-link"]}>
-            Not a member yet? <Link to="/signup">Sign up</Link>
-          </div>
-        </Form>
-      </div>
+      <h1>Welcome!</h1>
+      <LoginForm></LoginForm>
+      <Footer type="login" linkTo="signup" linkText="Sign up"></Footer>
     </div>
   );
 };

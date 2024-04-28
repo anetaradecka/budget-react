@@ -1,122 +1,14 @@
 .form-container {
-  max-width: 440px;
-  padding: 0 20px;
+  width: 440px;
+  height: 550px;
+  padding: 40px;
   position: absolute;
+  background: #fff;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.wrapper {
-  width: 100%;
-  min-width: 400px;
-  min-height: 523px;
-  background: #fff;
-  padding-left: 25px;
-}
-
-.wrapper .title {
-  height: 90px;
-  color: #000;
-  font-size: 30px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 30px;
-}
-
-.wrapper form {
-  padding-top: 30px;
-  padding-right: 25px;
-  padding-bottom: 25px;
-  flex-direction: column;
-  background-color: var(--bg-container);
-}
-
-.wrapper form .row {
-  position: relative;
-  margin-bottom: 30px;
-}
-
-.wrapper form .row input {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  padding: 7px 0 7px 0;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid lightgrey;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-
-.wrapper form .row input.invalid {
-  border: 1px solid red;
-}
-
-form .row label {
-  color: #777;
-  font-size: 16px;
-}
-
-.wrapper .pass {
-  text-align: end;
-  padding-bottom: 40px;
-}
-
-.wrapper form .pass a {
-  color: #999;
-  font-size: 17px;
-  text-decoration: none;
-}
-
-.wrapper form .button {
-  color: #fff;
-  min-width: 177px;
-  font-size: 17px;
-  font-weight: 500;
-  padding: 12px 30px;
-  background: cornflowerblue;
-  border: 1px solid cornflowerblue;
-  transition: all 0.3s ease;
-}
-
-form .button:hover {
-  background: #fff;
-  color: cornflowerblue;
-}
-
-.wrapper form .signup-link {
-  margin-top: 20px;
-  font-size: 17px;
-  text-align: center;
-}
-
-.wrapper form .signup-link a {
-  color: cornflowerblue;
-  text-decoration: none;
-}
-
-.error-msg {
-  height: auto;
-  top: -30px;
-  margin-bottom: 10px;
-  border: 1px solid;
-  border-radius: 5px;
-  border-color: rgb(249, 92, 92);
-  background-color: rgb(255, 232, 232);
-  font-size: 12px;
-  color: red;
-  padding: 10px;
-}
-
 .error-msg.form-outside {
   min-width: 400px;
-}
-
-.isError {
-  border: red;
-  background-color: rgb(246, 160, 160) (153, 134, 134);
 }
