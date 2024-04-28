@@ -3,25 +3,34 @@ import { redirect, json, useActionData } from "react-router-dom";
 // styles
 import styles from "./Auth.module.css";
 // components
+import FormContainer from "../../components/Containers/FormContainer/FormContainer";
 import LoginForm from "../../components/Forms/AuthForms/LoginForm";
 import Footer from "../../components/Forms/Footer/Footer";
 // utils
 import { getCSRFToken } from "../../utils/auth";
 
 const Login = () => {
-  const errors = useActionData();
+  const data = useActionData();
 
   return (
-    <div className={styles["form-container"]}>
-      {errors && errors.message && (
+    <FormContainer title="Welcome!">
+      {data && data.data && (
+        <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
+          <ul>
+            {data.data.map((err) => (
+              <li key={err.msg}>{err.msg}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {/* {errors && errors.message && (
         <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
           <p>{errors.message}</p>
         </div>
-      )}
-      <h1>Welcome!</h1>
+      )} */}
       <LoginForm></LoginForm>
       <Footer type="login" linkTo="signup" linkText="Sign up"></Footer>
-    </div>
+    </FormContainer>
   );
 };
 

@@ -10,7 +10,7 @@ import Img from "./Img";
 import Edit from "./Edit";
 import Delete from "./Delete";
 import TransactionData from "./TransactionData";
-import Container from "../../components/Container/Container";
+import Container from "../../components/Containers/Container/Container";
 import AddTransaction from "./AddTransaction";
 
 const Transactions = () => {

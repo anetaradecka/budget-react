@@ -3,6 +3,7 @@ import { redirect, json, useActionData } from "react-router-dom";
 // styles
 import styles from "./Auth.module.css";
 // components
+import FormContainer from "../../components/Containers/FormContainer/FormContainer";
 import SignupForm from "../../components/Forms/AuthForms/SignupForm";
 import Footer from "../../components/Forms/Footer/Footer";
 // utils
@@ -12,7 +13,7 @@ const Signup = () => {
   const data = useActionData();
 
   return (
-    <div className={styles["form-container"]}>
+    <FormContainer title="Get started for free">
       {data && data.data && (
         <div className={`${styles["error-msg"]} ${styles["form-outside"]}`}>
           <ul>
@@ -22,10 +23,9 @@ const Signup = () => {
           </ul>
         </div>
       )}
-      <h1>Get started for free</h1>
       <SignupForm></SignupForm>
       <Footer type="signup" linkTo="" linkText="Log in"></Footer>
-    </div>
+    </FormContainer>
   );
 };
 
