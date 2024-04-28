@@ -1,7 +1,7 @@
 // external libraries
 import { Form } from "react-router-dom";
 // styles
-import styles from "./Auth.module.css";
+import styles from "./AuthForms.module.css";
 import btnStyles from "../../Buttons/Button.module.css";
 // components
 import Input from "./Input";

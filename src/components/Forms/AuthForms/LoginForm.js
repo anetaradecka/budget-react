@@ -1,7 +1,7 @@
 // external libraries
-import { Form, Link } from "react-router-dom";
+import { Form } from "react-router-dom";
 // styles
-import styles from "./Auth.module.css";
+import styles from "./AuthForms.module.css";
 import btnStyles from "../../Buttons/Button.module.css";
 // components
 import Input from "./Input";
@@ -49,9 +49,6 @@ const LoginForm = () => {
         onBlur={handlePasswordBlur}
         error={passwordHasError && "Password field cannot be empty."}
       />
-      <Link to="/reset-password" className="secondary">
-        Forgot password?
-      </Link>
       <Button
         className={`${btnStyles.button} ${btnStyles["btn-primary"]}`}
         type="submit"

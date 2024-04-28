@@ -1,4 +1,4 @@
-import styles from "./Auth.module.css";
+import styles from "./AuthForms.module.css";
 
 export default function Input({ label, id, error, ...props }) {
   return (

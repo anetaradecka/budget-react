@@ -5,7 +5,7 @@ form {
 
 form .row {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 form .row input {
@@ -17,7 +17,7 @@ form .row input {
   border-left: none;
   border-right: none;
   border-bottom: 1px solid lightgrey;
-  font-size: 16px;
+  font-size: 14px;
   transition: all 0.3s ease;
 }
 
@@ -27,16 +27,17 @@ form .row input.invalid {
 
 form .row label {
   color: #777;
-  font-size: 16px;
+  font-size: 14px;
+}
+
+form button {
+  margin-top: 20px;
 }
 
 form a {
   float: right;
 }
 
-form button {
-  margin-top: 50px;
-}
 .error-msg {
   height: auto;
   top: -30px;
