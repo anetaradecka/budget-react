@@ -5,9 +5,15 @@ const ErrorContainer = (props) => {
   return (
     <div className={`${styles["error-msg"]}`}>
       <ul>
-        {props.data.data.map((err) => (
-          <li key={err.msg}>{err.msg}</li>
-        ))}
+        {props.errorData.data ? (
+          <>
+            {props.errorData.data.map((err) => (
+              <li key={err.msg}>{err.msg}</li>
+            ))}
+          </>
+        ) : (
+          <li key={props.errorData.message}>{props.errorData.message}</li>
+        )}
       </ul>
     </div>
   );

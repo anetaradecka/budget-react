@@ -12,12 +12,9 @@ import { getCSRFToken } from "../../utils/auth";
 
 const Signup = () => {
   const response = useActionData();
-
   return (
     <FormContainer title="Get started for free">
-      {response && response.data && (
-        <ErrorContainer data={response}></ErrorContainer>
-      )}
+      {response && <ErrorContainer errorData={response}></ErrorContainer>}
       <SignupForm></SignupForm>
       <Footer type="signup" linkTo="" linkText="Log in"></Footer>
     </FormContainer>
