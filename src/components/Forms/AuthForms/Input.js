@@ -4,8 +4,11 @@ export default function Input({ label, id, error, ...props }) {
   return (
     <div className={styles.row}>
       <label htmlFor={id}>{label}</label>
-      <input id={id} {...props} />
-      <div>{error && <p className={styles["error-msg"]}>{error}</p>}</div>
+      <input
+        id={id}
+        {...props}
+        className={`${error ? styles.invalid : null}`}
+      />
     </div>
   );
 }
