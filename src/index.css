@@ -1,25 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 :root {
-  --bg-color: #ece8e654;
-  --bg-container: white;
-  --btn-primary: #c9ab3a;
-  --btn-secondary: #f1de7d;
-  --btn-tertiary: #d5d5d3;
-
-  --font-primary: "Raleway", sans-serif;
-  --text-base-color: #24271b;
-  --primary-link-color: #c9ab3a;
-  --active-link-color: #f1de7d;
-  --secondary-link-color: #d6cfcd;
-  --active-secondary-link-color: red;
-  --hover-link-color: #759cc9;
-  --column-title: #aeaeae;
-
-  --shadow: 1px 3px 5px #dbd9d9;
+  /* backgrounds */
+  --bg-color: #fff;
+  --bg-container: #fff;
+  --bg-btn-primary: #fff;
+  --bg-btn-secondary: #fff;
+  /* borders */
+  --border-btn-primary: #0d0d0d;
+  --border-btn-primary: #676767;
   --form-control-border: #eeecf1;
   --form-control-border-focus: #949494;
   --row-border: #eeecf1;
+  /* fonts */
+  --font-primary: "Raleway", sans-serif;
+  --btn-tertiary: #aeaeae;
+  --btn-hidden: #aeaeae;
+  /* font color */
+  --text-base-color: #0d0d0d;
+  --color-btn-primary: #0d0d0d;
+  --color-btn-secondary: #676767;
+  --primary-link-color: #000;
+  --active-link-color: #000;
+
+  --column-title: #aeaeae;
+
+  --shadow: 1px 3px 5px #dbd9d9;
 }
 
 * {
@@ -41,6 +47,15 @@ body {
 a {
   text-decoration: none;
   text-transform: none;
+  font-family: var(--font-primary);
+}
+
+a:visited {
+  color: var(--primary-link-color);
+}
+
+a:hover {
+  color: var(--primary-link-color);
 }
 
 a.primary {

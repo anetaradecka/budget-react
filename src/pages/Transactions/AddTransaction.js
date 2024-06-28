@@ -1,6 +1,7 @@
 import Container from "../../components/Containers/Container/Container";
 import styles from "./TransactionsGrid.module.css";
-import ButtonSecondary from "../../components/Buttons/ButtonSecondary";
+import btnStyles from "../../components/Buttons/Button.module.css";
+import Button from "../../components/Buttons/Button";
 import { useState } from "react";
 import Modal from "../../components/Modal/Modal";
 
@@ -35,9 +36,12 @@ const AddTransaction = (props) => {
             start.
           </div>
           <div className={styles["grid-2-columns"]}>
-            <ButtonSecondary onClick={handleButtonClick}>
-              + Add transaction
-            </ButtonSecondary>
+            <Button
+              className={btnStyles["btn-primary"]}
+              onClick={handleButtonClick}
+            >
+              New transaction
+            </Button>
           </div>
         </section>
       </Container>

@@ -18,7 +18,7 @@ const Header = () => {
             Hello, <span id="username">{userName}</span>!
           </h2>
         </div>
-        <SecondaryNav />
+        {/* <SecondaryNav /> */}
       </div>
       <div id={styles["second-row"]}>
         <h3 id="pageTitle">{titleCtx.pageTitle}</h3>

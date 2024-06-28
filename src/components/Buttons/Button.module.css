@@ -1,20 +1,31 @@
-.button {
-  color: #fff;
-  min-width: 177px;
+button {
+  min-width: 150px;
   font-size: 17px;
   font-weight: 500;
   padding: 10px 15px;
-  border-radius: 3px;
+  border-radius: 30px;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.button.btn-primary {
-  background: var(--btn-primary);
-  border: 1px solid var(--btn-primary);
+button.btn-primary {
+  background: var(--bg-btn-primary);
+  border: 1px solid var(--border-btn-primary);
+  color: #000;
 }
 
-.button.btn-primary:hover {
+/* .button.btn-primary:hover {
   background: #fff;
   color: var(--btn-primary);
+} */
+
+button.btn-secondary {
+  background: var(--bg-btn-secondary);
+  border: 1px dotted var(--bg-btn-secondary);
+  color: #000;
 }
+
+/* .button.btn-secondary:hover {
+  background: #fff;
+  color: var(--btn-primary);
+} */

@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./AddTransactionForm.module.css";
-import ButtonPrimary from "../../Buttons/ButtonPrimary";
+import Button from "../../Buttons/Button";
+import btnStyles from "../../Buttons/Button.module.css";
 import categories from "../../../constants/categories";
 
 const AddTransactionForm = (props) => {
@@ -171,7 +172,9 @@ const AddTransactionForm = (props) => {
         </div>
 
         <div className={styles.buttons}>
-          <ButtonPrimary type="submit">Save</ButtonPrimary>
+          <Button className={btnStyles["btn-primary"]} type="submit">
+            Save
+          </Button>
         </div>
         <input type="hidden" name="type" />
       </Form>
