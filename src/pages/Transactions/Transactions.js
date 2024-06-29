@@ -3,15 +3,16 @@ import { redirect } from "react-router-dom";
 import { getAuthToken } from "../../utils/auth";
 import { getCSRFToken } from "../../utils/auth";
 
-import styles from "./TransactionsGrid.module.css";
+// import styles from "./TransactionsGrid.module.css";
 
-import Grid from "./Grid";
-import Img from "./Img";
-import Edit from "./Edit";
-import Delete from "./Delete";
-import TransactionData from "./TransactionData";
+// import Grid from "../../components/Layout/Grid";
+// import Img from "../../components/Layout/Img";
+// import Edit from "../../components/Layout/Edit";
+// import Delete from "../../components/Layout/Delete";
+// import TransactionData from "../../components/Layout/TransactionData";
 import Container from "../../components/Containers/Container/Container";
 import AddTransaction from "./AddTransaction";
+import GridPanel from "../../components/Layout/GridPanel";
 
 const Transactions = () => {
   const scrollRef = useRef(null);
@@ -141,7 +142,8 @@ const Transactions = () => {
     <>
       <AddTransaction onTransactionSubmit={handleTransactionSubmit} />
       <Container>
-        <div className={styles["grid-panel"]}>
+        <GridPanel transactions={transactions} onDelete={handleItemDelete} />
+        {/* <div className={styles["grid-panel"]}>
           <section className={`${styles.grid}`}>
             <div className={`${styles.meta} ${styles["grid-row"]}`}>
               <div className={styles["grid-cell"]}></div>
@@ -177,7 +179,7 @@ const Transactions = () => {
                 ))}
             </div>
           </section>
-        </div>
+        </div> */}
       </Container>
     </>
   );

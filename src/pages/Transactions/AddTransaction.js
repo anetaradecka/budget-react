@@ -1,5 +1,5 @@
 import Container from "../../components/Containers/Container/Container";
-import styles from "./TransactionsGrid.module.css";
+import styles from "../../components/Layout/TransactionsGrid.module.css";
 import btnStyles from "../../components/Buttons/Button.module.css";
 import Button from "../../components/Buttons/Button";
 import { useState } from "react";
