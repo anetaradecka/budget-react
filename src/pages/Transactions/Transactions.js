@@ -11,7 +11,7 @@ import { getCSRFToken } from "../../utils/auth";
 // import Delete from "../../components/Layout/Delete";
 // import TransactionData from "../../components/Layout/TransactionData";
 import Container from "../../components/Containers/Container/Container";
-import AddTransaction from "./AddTransaction";
+import AddTransactionSection from "../../components/Sections/AddTransactionSection";
 import GridPanel from "../../components/Layout/GridPanel";
 
 const Transactions = () => {
@@ -140,46 +140,9 @@ const Transactions = () => {
 
   return (
     <>
-      <AddTransaction onTransactionSubmit={handleTransactionSubmit} />
+      <AddTransactionSection onTransactionSubmit={handleTransactionSubmit} />
       <Container>
         <GridPanel transactions={transactions} onDelete={handleItemDelete} />
-        {/* <div className={styles["grid-panel"]}>
-          <section className={`${styles.grid}`}>
-            <div className={`${styles.meta} ${styles["grid-row"]}`}>
-              <div className={styles["grid-cell"]}></div>
-              <div className={styles["grid-cell"]}>description</div>
-              <div className={styles["grid-cell"]}>category</div>
-              <div className={styles["grid-cell"]}>subcategory</div>
-              <div className={styles["grid-cell"]}>date</div>
-              <div className={styles["grid-cell"]}>inflow</div>
-              <div className={styles["grid-cell"]}>outflow</div>
-              <div
-                className={`${styles["cell-edit"]} ${styles["grid-cell"]}`}
-              ></div>
-            </div>
-            <div className={styles.scrollbar} ref={scrollRef}>
-              {transactions.length === 0 && (
-                <p className={styles.noresults}>No transactions found!</p>
-              )}
-              {transactions.length > 0 &&
-                transactions.map((transaction) => (
-                  <Grid key={transaction._id}>
-                    <Img />
-                    <TransactionData transaction={transaction} />
-                    <div
-                      className={`${styles["cell-edit"]} ${styles["grid-cell"]}`}
-                    >
-                      <Edit itemId={transaction._id} />
-                      <Delete
-                        itemId={transaction._id}
-                        onItemDelete={handleItemDelete}
-                      />
-                    </div>
-                  </Grid>
-                ))}
-            </div>
-          </section>
-        </div> */}
       </Container>
     </>
   );

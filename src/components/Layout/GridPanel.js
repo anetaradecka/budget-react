@@ -29,7 +29,11 @@ const GridPanel = (props) => {
           )}
           {props.transactions.length > 0 &&
             props.transactions.map((transaction) => (
-              <GridRow key={transaction._id} transaction={transaction} />
+              <GridRow
+                key={transaction._id}
+                transaction={transaction}
+                onDelete={props.onDelete}
+              />
             ))}
         </div>
       </section>
