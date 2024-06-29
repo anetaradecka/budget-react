@@ -1,20 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+// external libraries
+import { useState, useEffect } from "react";
 import { redirect } from "react-router-dom";
-import { getAuthToken } from "../../utils/auth";
-import { getCSRFToken } from "../../utils/auth";
-
-import styles from "./TransactionsGrid.module.css";
-
-import Grid from "./Grid";
-import Img from "./Img";
-import Edit from "./Edit";
-import Delete from "./Delete";
-import TransactionData from "./TransactionData";
+// components
 import Container from "../../components/Containers/Container/Container";
-import AddTransaction from "./AddTransaction";
+import AddTransactionSection from "../../components/Sections/AddTransactionSection";
+import GridPanel from "../../components/Layout/GridPanel";
+// utils
+import { getAuthToken, getCSRFToken } from "../../utils/auth";
 
 const Transactions = () => {
-  const scrollRef = useRef(null);
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
@@ -139,45 +133,9 @@ const Transactions = () => {
 
   return (
     <>
-      <AddTransaction onTransactionSubmit={handleTransactionSubmit} />
+      <AddTransactionSection onTransactionSubmit={handleTransactionSubmit} />
       <Container>
-        <div className={styles["grid-panel"]}>
-          <section className={`${styles.grid}`}>
-            <div className={`${styles.meta} ${styles["grid-row"]}`}>
-              <div className={styles["grid-cell"]}></div>
-              <div className={styles["grid-cell"]}>description</div>
-              <div className={styles["grid-cell"]}>category</div>
-              <div className={styles["grid-cell"]}>subcategory</div>
-              <div className={styles["grid-cell"]}>date</div>
-              <div className={styles["grid-cell"]}>inflow</div>
-              <div className={styles["grid-cell"]}>outflow</div>
-              <div
-                className={`${styles["cell-edit"]} ${styles["grid-cell"]}`}
-              ></div>
-            </div>
-            <div className={styles.scrollbar} ref={scrollRef}>
-              {transactions.length === 0 && (
-                <p className={styles.noresults}>No transactions found!</p>
-              )}
-              {transactions.length > 0 &&
-                transactions.map((transaction) => (
-                  <Grid key={transaction._id}>
-                    <Img />
-                    <TransactionData transaction={transaction} />
-                    <div
-                      className={`${styles["cell-edit"]} ${styles["grid-cell"]}`}
-                    >
-                      <Edit itemId={transaction._id} />
-                      <Delete
-                        itemId={transaction._id}
-                        onItemDelete={handleItemDelete}
-                      />
-                    </div>
-                  </Grid>
-                ))}
-            </div>
-          </section>
-        </div>
+        <GridPanel transactions={transactions} onDelete={handleItemDelete} />
       </Container>
     </>
   );

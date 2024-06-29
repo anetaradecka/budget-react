@@ -1,7 +1,5 @@
 // external libraries
 import { redirect, json, useActionData } from "react-router-dom";
-// styles
-// import styles from "./Auth.module.css";
 // components
 import FormContainer from "../../components/Containers/FormContainer/FormContainer";
 import SignupForm from "../../components/Forms/AuthForms/SignupForm";

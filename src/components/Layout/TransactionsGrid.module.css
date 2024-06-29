@@ -65,6 +65,7 @@
   display: flex;
   background: none;
   border: none;
+  min-width: initial;
 }
 
 .noresults {

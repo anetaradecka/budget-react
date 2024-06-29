@@ -1,22 +1,16 @@
+// styles
 import styles from "./TransactionsGrid.module.css";
-import { currencyFormatter } from "../../utils/formatting";
+// components
+import Img from "./Img";
+import Edit from "./Edit";
+import Delete from "./Delete";
+// utils
+import { currencyFormatter, convertToLocaleDate } from "../../utils/formatting";
 
-const TransactionData = (props) => {
-  // TODO: move to utils
-  const convertToLocaleDate = (data) => {
-    let date = new Date(data);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    date = `${year}/${month}/${day}`;
-    String(date);
-    return date;
-  };
-
-  const date = convertToLocaleDate(props.transaction.date);
-
+const GridRow = (props) => {
   return (
-    <>
+    <div className={styles["grid-row"]}>
+      <Img />
       <div className={`${styles["grid-cell"]} ${styles["data-item"]}`}>
         {props.transaction.description}
       </div>
@@ -27,7 +21,7 @@ const TransactionData = (props) => {
         {props.transaction.subcategory}
       </div>
       <div className={`${styles["grid-cell"]} ${styles["data-item"]}`}>
-        {String(date)}
+        {String(convertToLocaleDate(props.transaction.date))}
       </div>
       <div className={`${styles["grid-cell"]} ${styles["data-item"]}`}>
         {props.transaction.type === "inflow"
@@ -39,8 +33,12 @@ const TransactionData = (props) => {
           ? `- ${currencyFormatter.format(props.transaction.value)} `
           : ""}
       </div>
-    </>
+      <div className={`${styles["cell-edit"]} ${styles["grid-cell"]}`}>
+        <Edit itemId={props.transaction._id} />
+        <Delete itemId={props.transaction._id} onItemDelete={props.onDelete} />
+      </div>
+    </div>
   );
 };
 
-export default TransactionData;
+export default GridRow;

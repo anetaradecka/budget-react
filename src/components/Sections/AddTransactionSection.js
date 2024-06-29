@@ -1,11 +1,14 @@
-import Container from "../../components/Containers/Container/Container";
-import styles from "./TransactionsGrid.module.css";
-import btnStyles from "../../components/Buttons/Button.module.css";
-import Button from "../../components/Buttons/Button";
+// external libraries
 import { useState } from "react";
-import Modal from "../../components/Modal/Modal";
+// styles
+import styles from "../../components/Layout/TransactionsGrid.module.css";
+import btnStyles from "../../components/Buttons/Button.module.css";
+// components
+import Container from "../Containers/Container/Container";
+import Button from "../Buttons/Button";
+import Modal from "../Modal/Modal";
 
-const AddTransaction = (props) => {
+const AddTransactionSection = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleButtonClick = () => {
@@ -49,4 +52,4 @@ const AddTransaction = (props) => {
   );
 };
 
-export default AddTransaction;
+export default AddTransactionSection;
