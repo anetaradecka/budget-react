@@ -1,21 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+// external libraries
+import { useState, useEffect } from "react";
 import { redirect } from "react-router-dom";
-import { getAuthToken } from "../../utils/auth";
-import { getCSRFToken } from "../../utils/auth";
-
-// import styles from "./TransactionsGrid.module.css";
-
-// import Grid from "../../components/Layout/Grid";
-// import Img from "../../components/Layout/Img";
-// import Edit from "../../components/Layout/Edit";
-// import Delete from "../../components/Layout/Delete";
-// import TransactionData from "../../components/Layout/TransactionData";
+// components
 import Container from "../../components/Containers/Container/Container";
 import AddTransactionSection from "../../components/Sections/AddTransactionSection";
 import GridPanel from "../../components/Layout/GridPanel";
+// utils
+import { getAuthToken, getCSRFToken } from "../../utils/auth";
 
 const Transactions = () => {
-  const scrollRef = useRef(null);
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {

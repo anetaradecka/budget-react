@@ -7,7 +7,7 @@ import GridRow from "./GridRow";
 
 const GridPanel = (props) => {
   const scrollRef = useRef(null);
-
+  // TODO: move category names to constants folder
   return (
     <div className={styles["grid-panel"]}>
       <section className={`${styles.grid}`}>

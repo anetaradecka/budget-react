@@ -1,5 +1,4 @@
 import styles from "./Header.module.css";
-import SecondaryNav from "../Navigation/SecondaryNavigation/SecondaryNav";
 import { useContext } from "react";
 import { TitleContext } from "../../store/title-context";
 
@@ -18,7 +17,6 @@ const Header = () => {
             Hello, <span id="username">{userName}</span>!
           </h2>
         </div>
-        {/* <SecondaryNav /> */}
       </div>
       <div id={styles["second-row"]}>
         <h3 id="pageTitle">{titleCtx.pageTitle}</h3>
