@@ -47,7 +47,7 @@ export async function submitNewItem(data) {
   const token = getAuthToken();
   const csrfToken = getCSRFToken();
 
-  const payload = {
+  const submitData = {
     category: data.category,
     date: data.date,
     value: data.value,
@@ -64,7 +64,7 @@ export async function submitNewItem(data) {
         Authorization: "Bearer " + token,
         "X-CSRF-Token": csrfToken,
       },
-      body: JSON.stringify({ payload }),
+      body: JSON.stringify({ submitData }),
     }
   );
 
