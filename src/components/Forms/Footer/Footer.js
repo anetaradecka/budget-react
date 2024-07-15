@@ -9,7 +9,7 @@ const Footer = (props) => {
       {props.type === "login" && (
         <p>
           Password forgotten? &nbsp;
-          <Link to="/reset-password" className="secondary">
+          <Link to="/reset-password" className="primary">
             Reset password
           </Link>
         </p>

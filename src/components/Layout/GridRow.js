@@ -1,5 +1,5 @@
 // styles
-import styles from "./TransactionsGrid.module.css";
+import styles from "./Layout.module.css";
 // components
 import Img from "./Img";
 import Edit from "./Edit";

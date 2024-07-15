@@ -1,7 +1,7 @@
 // external libraries
 import { useState } from "react";
 // styles
-import styles from "../../components/Layout/TransactionsGrid.module.css";
+import styles from "../../components/Layout/Layout.module.css";
 import btnStyles from "../../components/Buttons/Button.module.css";
 // components
 import Container from "../Containers/Container/Container";

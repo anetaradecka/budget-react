@@ -12,6 +12,7 @@
   --form-control-border: #eeecf1;
   --form-control-border-focus: #949494;
   --row-border: #eeecf1;
+  --form-container-border: #949494;
   /* fonts */
   --font-primary: "Raleway", sans-serif;
   --btn-tertiary: #aeaeae;
@@ -60,6 +61,7 @@ a:hover {
 
 a.primary {
   color: var(--primary-link-color);
+  font-weight: bolder;
 }
 
 a.primary:hover {
